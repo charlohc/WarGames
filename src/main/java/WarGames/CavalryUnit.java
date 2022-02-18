@@ -1,6 +1,7 @@
 package WarGames;
 
 public class CavalryUnit extends Unit{
+     int bonus= 2;
 
     public CavalryUnit(String name, int health, int attack, int armor) {
         super(name, health, attack, armor);
@@ -12,12 +13,12 @@ public class CavalryUnit extends Unit{
 
     @Override
     public int getAttackBonus() {
-        int sum= 2;
-      for(int i = 0; i <=1; i++){
-          sum += 4;
-      }
-      return sum;
+        for(int nrOfAttacks = 1; nrOfAttacks == 1; nrOfAttacks++){
+            bonus += 4;
+        }
+          return bonus;
     }
+
 
     @Override
     public int getResistBonus() {

@@ -23,7 +23,7 @@ public abstract class Unit{
         return health;
     }
 
-    public int getAttack() {
+    public int getAttackValue() {
         return attack;
     }
 
@@ -39,8 +39,11 @@ public abstract class Unit{
 
     public abstract int getResistBonus();
 
+//TODO: Make toString() function
+
+//TODO: place opponent in parameter attack() maybe?
     public void attack() {
-        int healthOpponent = getAttack() - (getAttack() + getAttackBonus()) + (getArmor() + getResistBonus());
+        int healthOpponent = getAttackValue() - (getAttackValue() + getAttackBonus()) + (getArmor() + getResistBonus());
     }
 
 
