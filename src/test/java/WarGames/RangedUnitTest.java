@@ -11,12 +11,18 @@ class RangedUnitTest {
     public void AfterFirstAttackBonusIsSix(){
       assertEquals(6,rangedUnit.getResistBonus());
     }
+
     @Test
     public void AfterSecondAttackBonusIsFour(){
-        assertEquals(4,rangedUnit.getResistBonus());
+        RangedUnit rangedUnit1 = new RangedUnit("",1,1,1);
+        rangedUnit1.getResistBonus();
+        assertEquals(4,rangedUnit1.getResistBonus());
     }
     @Test
     public void AfterThirdAttackBonusIsTwo(){
-        assertEquals(2,rangedUnit.getResistBonus());
+        RangedUnit rangedUnit2 = new RangedUnit("",1,1,1);
+        rangedUnit2.getResistBonus();
+        rangedUnit2.getResistBonus();
+        assertEquals(2,rangedUnit2.getResistBonus());
     }
 }
