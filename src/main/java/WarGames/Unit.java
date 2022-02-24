@@ -39,10 +39,20 @@ public abstract class Unit{
 
     public abstract int getResistBonus();
 
-//TODO: Make toString() function
+//TODO: Make improvements more specific to game toString() function
 
-//TODO: place opponent in parameter attack() maybe?
-    public void attack() {
+    @Override
+    public String toString() {
+        return "Unit{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", attack=" + attack +
+                ", armor=" + armor +
+                '}';
+    }
+
+    //TODO: place opponent in parameter attack() maybe?, ask for help
+    public void attack(Unit opponent) {
         int healthOpponent = getAttackValue() - (getAttackValue() + getAttackBonus()) + (getArmor() + getResistBonus());
     }
 
