@@ -25,7 +25,7 @@ class BattleTest {
         }
 
         for (int i = 0; i < 100; i++) {
-            humans.addUnit(new CavalryUnit("Knigth", 100));
+            humans.addUnit(new CavalryUnit("Knight", 100));
             orcs.addUnit(new CavalryUnit("Raider", 100));
         }
 
