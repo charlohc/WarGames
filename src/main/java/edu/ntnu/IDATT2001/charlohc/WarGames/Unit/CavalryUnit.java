@@ -1,9 +1,11 @@
-package WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
+
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 
 /**
  * CavalryUnit Subclass of Unit
  */
-public class CavalryUnit extends Unit{
+public class CavalryUnit extends Unit {
      private int numberOfAttacks = 0;
 
     public CavalryUnit(String name, int health, int attack, int armor) {

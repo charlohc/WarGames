@@ -1,4 +1,6 @@
-package WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
+
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 
 /**
  * RangedUnit subclass of Unit

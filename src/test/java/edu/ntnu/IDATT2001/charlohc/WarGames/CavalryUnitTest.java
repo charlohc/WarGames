@@ -1,5 +1,6 @@
-package WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames;
 //ha test for attack get health
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CavalryUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +11,12 @@ CavalryUnit cavalryUnit1, cavalryUnit2;
 
     @BeforeEach
     public void reset(){
-        cavalryUnit1 = new CavalryUnit("Cavalry Unit One",100,20,12);
-        cavalryUnit2 = new CavalryUnit("Cavalry Unit Two",100,20,12);
+    try {
+        cavalryUnit1 = new CavalryUnit("Cavalry Unit One", 100, 20, 12);
+        cavalryUnit2 = new CavalryUnit("Cavalry Unit Two", 100, 20, 12);
+    }catch (Exception e) {
+        System.out.println("Error: " + e.getMessage());
+    }
     }
 
     @Test

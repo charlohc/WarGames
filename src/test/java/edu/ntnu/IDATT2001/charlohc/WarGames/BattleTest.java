@@ -1,5 +1,9 @@
-package WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CavalryUnit;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CommanderUnit;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.InfantryUnit;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.RangedUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -11,8 +15,13 @@ class BattleTest {
 
     @BeforeEach
     public void reset() {
+        try{
          humans = new Army("Human army", new ArrayList<>());
          orcs = new Army("Orcish horde", new ArrayList<>());
+
+        }catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
 
         for (int i = 0; i < 500; i++) {
             humans.addUnit(new InfantryUnit("Footman", 100));

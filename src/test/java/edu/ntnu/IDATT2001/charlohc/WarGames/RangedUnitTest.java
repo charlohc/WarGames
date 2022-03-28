@@ -1,5 +1,6 @@
-package WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.RangedUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +11,12 @@ class RangedUnitTest {
 
     @BeforeEach
     public void reset(){
-        rangedUnit1 = new RangedUnit("Ranged Unit one",100,15,8);
-        rangedUnit2 = new RangedUnit("Ranged Unit two",100,15,8);
+    try {
+        rangedUnit1 = new RangedUnit("Ranged Unit one", 100, 15, 8);
+        rangedUnit2 = new RangedUnit("Ranged Unit two", 100, 15, 8);
+    }catch (Exception e){
+        System.out.println("Error: " + e.getMessage());
+    }
     }
     @Test
     public void AfterFirstAttackBonusIsSix(){

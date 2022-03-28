@@ -1,4 +1,4 @@
-package WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
 
 /**
  * Abstract super class Unit
@@ -17,7 +17,11 @@ public abstract class Unit{
      * @param attack int that represents the units weapon
      * @param armor int that represents the defends under attack
      */
-    public Unit(String name, int health, int attack, int armor){
+    public Unit(String name, int health, int attack, int armor)throws IllegalArgumentException{
+        if(name.isBlank()){throw new IllegalArgumentException("Name can not be blank");}
+        if(health < 0){throw new IllegalArgumentException("Health can not be negative");}
+        if(attack < 0){throw new IllegalArgumentException("Attack value can not be negative");}
+        if(armor < 0) {throw new IllegalArgumentException("Armor value can not be negative");        }
         this.name = name;
         this.health = health;
         this.attack = attack;
@@ -61,6 +65,7 @@ public abstract class Unit{
      * @param health
      */
     public void setHealth(int health) {
+        if(health < 0){setHealth(0);}
         this.health = health;
     }
 
@@ -77,6 +82,21 @@ public abstract class Unit{
     public abstract int getResistBonus();
 
     /**
+     * Methode that changes the health of the opponent after an attack, the health value cannot be negative, therefore
+     * the lowest health value the opponent can archive is zero
+     * @param opponent unit that gets attacked
+     */
+
+    public void attack(Unit opponent) {
+        int healthOpponent = opponent.health - (this.attack + this.getAttackBonus()) + (opponent.getArmor() + getResistBonus());
+        opponent.setHealth(healthOpponent);
+
+        if(opponent.getHealth() < 0){
+            opponent.setHealth(0);
+        }
+    }
+
+    /**
      * Methode that return information about the unit
      * @return name, health, attack, armor
      */
@@ -87,20 +107,5 @@ public abstract class Unit{
                 ", attack=" + attack +
                 ", armor=" + armor ;
     }
-
-    /**
-     * Methode that changes the health of the opponent after an attack, the health value cannot be negative, therefore
-     * the lowest health value the opponent can archive is zero
-     * @param opponent unit that gets attacked
-     */
-
-    public void attack(Unit opponent) {
-        int healthOpponent = opponent.health - (this.attack + this.getAttackBonus()) + (opponent.getArmor() + getResistBonus());
-        opponent.setHealth(healthOpponent);
-        if(opponent.getHealth() < 0){
-            opponent.setHealth(0);
-        }
-    }
-
 
 }

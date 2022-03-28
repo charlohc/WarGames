@@ -1,4 +1,6 @@
-package WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames;
+
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,8 @@ public class Army {
      * @param name name of army
      * @param units list of units
      */
-    public Army(String name, List<Unit> units) {
+    public Army(String name, List<Unit> units)throws IllegalArgumentException {
+        if(name.isBlank()){throw new IllegalArgumentException("Name of army can not be blank");}
         this.name = name;
         this.units = units;
     }
@@ -32,6 +35,46 @@ public class Army {
      */
     public String getName() {
         return name;
+    }
+
+    /**
+     * Method filters through the list and adds all objects that are instances of InfantryUnit to a new list
+     * @return list with only Infantry units
+     */
+    public List<Unit> getInfantryUnits(){
+    return units.stream()
+            .filter(unit -> unit instanceof InfantryUnit)
+            .toList();
+    }
+
+    /**
+     * Method filters through the list and adds all objects that are instances of CavalryUnit to a new list
+     * @return list with only cavalry units
+     */
+    public List<Unit> getCavalryUnits(){
+        return this.units.stream()
+                .filter(unit -> unit instanceof CavalryUnit)
+                .toList();
+    }
+
+    /**
+     * Method filters through the list and adds all objects that are instances of RangedUnit to a new list
+     * @return list with only ranged units
+     */
+    public List<Unit> getRangedUnits(){
+        return this.units.stream()
+                .filter(unit -> unit instanceof RangedUnit)
+                .toList();
+    }
+
+    /**
+     * Method filters through the list and adds all objects that are instances of CommanderUnits to a new list
+     * @return list with only commander units
+     */
+    public List<Unit> getCommanderUnits(){
+        return this.units.stream()
+                .filter(unit -> unit instanceof CommanderUnit)
+                .toList();
     }
 
     /**
@@ -85,11 +128,20 @@ public class Army {
      * Methode that gets a random unit in the list units
      * @return unit
      */
-    public Unit getRandom(){
+    public Unit getRandomUnit(){
         int range = units.size();
         int random = (int) (Math.random() * range);
         return units.get(random);
     }
+
+    /**
+     * Methode that gets a random number
+     * @return random int
+     */
+    public int getRandomNumber(){
+        return (int) (Math.random() * 2);
+    }
+
 
     /**
      * Methode that return information about the unit
