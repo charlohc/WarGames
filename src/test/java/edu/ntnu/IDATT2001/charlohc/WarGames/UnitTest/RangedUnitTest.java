@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames.UnitTest;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.RangedUnit;
 import org.junit.jupiter.api.BeforeEach;

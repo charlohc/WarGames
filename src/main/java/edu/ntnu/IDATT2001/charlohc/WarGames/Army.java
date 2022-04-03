@@ -143,14 +143,21 @@ public class Army {
     }
 
 
+    public String removeBracketsUnitsList(){
+        StringBuilder sb = new StringBuilder();
+        for(Unit unit: units){
+            sb.append(unit);
+        }
+        return sb.toString();
+    }
+
     /**
      * Methode that return information about the unit
      * @return name, units
      */
     @Override
     public String toString() {
-        return '\'' +  name + '\''
-                + ", units=" + units ;
+        return name + removeBracketsUnitsList();
     }
 
     /**

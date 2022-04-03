@@ -16,8 +16,10 @@ class BattleTest {
     @BeforeEach
     public void reset() {
         try{
+
          humans = new Army("Human army", new ArrayList<>());
          orcs = new Army("Orcish horde", new ArrayList<>());
+         battle = new Battle(humans, orcs);
 
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
@@ -40,8 +42,6 @@ class BattleTest {
 
         humans.addUnit(new CommanderUnit("Mountain King", 180));
         orcs.addUnit(new CommanderUnit("gulDan", 180));
-
-         battle = new Battle(humans, orcs);
 
         System.out.println("The winner of the battle is : " + battle.simulate().toString());
     }

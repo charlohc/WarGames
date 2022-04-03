@@ -102,10 +102,8 @@ public abstract class Unit{
      */
     @Override
     public String toString() {
-        return '\'' + name + '\'' +
-                ", health=" + health +
-                ", attack=" + attack +
-                ", armor=" + armor ;
-    }
+        return  "\n" + getClass().getSimpleName() + ", " + name  +
+                ", " + health ;
 
+    }
 }

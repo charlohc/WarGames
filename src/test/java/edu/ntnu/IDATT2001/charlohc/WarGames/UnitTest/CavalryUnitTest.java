@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames;
+package edu.ntnu.IDATT2001.charlohc.WarGames.UnitTest;
 //ha test for attack get health
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CavalryUnit;
 import org.junit.jupiter.api.BeforeEach;
