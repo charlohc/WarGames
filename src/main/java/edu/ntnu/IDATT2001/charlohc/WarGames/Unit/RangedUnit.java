@@ -1,6 +1,8 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
+import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
 
 /**
  * RangedUnit subclass of Unit
@@ -24,7 +26,11 @@ public class RangedUnit extends Unit {
      */
     @Override
     public int getAttackBonus() {
-        return 3;
+        return switch (this.getTerrainType()) {
+            case HILL -> 6;
+            case FORREST -> 1;
+            default -> 3;
+        };
     }
 
     /**
@@ -45,5 +51,10 @@ public class RangedUnit extends Unit {
             default:
                 return 2;
         }
+    }
+
+    @Override
+    public UnitTypeENUM getUnitType() {
+        return UnitTypeENUM.RANGED;
     }
 }

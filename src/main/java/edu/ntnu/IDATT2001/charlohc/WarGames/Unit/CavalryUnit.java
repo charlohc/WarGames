@@ -1,6 +1,8 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
+import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
 
 /**
  * CavalryUnit Subclass of Unit
@@ -24,8 +26,10 @@ public class CavalryUnit extends Unit {
     public int getAttackBonus() {
         numberOfAttacks++;
          if(numberOfAttacks == 1){
+             if(this.getTerrainType().equals(TerrainTypesENUM.PLAINS)){return 8;}
              return 6;
          }else {
+             if (this.getTerrainType().equals(TerrainTypesENUM.PLAINS)){return 4;}
              return 2;
          }
     }
@@ -36,6 +40,12 @@ public class CavalryUnit extends Unit {
      */
     @Override
     public int getResistBonus() {
-        return 4;
+        if(this.getTerrainType().equals(TerrainTypesENUM.FORREST)){return 0;}
+        return 1;
+    }
+
+    @Override
+    public UnitTypeENUM getUnitType() {
+        return UnitTypeENUM.CAVALRY;
     }
 }

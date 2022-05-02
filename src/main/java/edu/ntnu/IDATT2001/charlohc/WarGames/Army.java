@@ -47,6 +47,7 @@ public class Army {
             .toList();
     }
 
+//TODO:Test this methode
     /**
      * Method filters through the list and adds all objects that are instances of CavalryUnit to a new list
      * @return list with only cavalry units
@@ -54,6 +55,7 @@ public class Army {
     public List<Unit> getCavalryUnits(){
         return this.units.stream()
                 .filter(unit -> unit instanceof CavalryUnit)
+                .filter(unit -> !(unit instanceof CommanderUnit))
                 .toList();
     }
 

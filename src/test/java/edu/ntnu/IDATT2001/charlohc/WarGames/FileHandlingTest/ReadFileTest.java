@@ -10,24 +10,31 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 //TODO: make more test
 class ReadFileTest {
     ReadFile readFile;
+    WriteFile writeFile;
+    Army army;
 
     @BeforeEach
     public void reset() throws IOException {
         readFile = new ReadFile();
+        army = new Army("Humans",new ArrayList<>());
+        writeFile = new WriteFile(army);
 
     }
 
     //TODO: How do i test that is returns correctly
+    //TODO: find another way to read from file, se teacher git lab
     @Test
     public void TestOutFileCorrectUsage() throws Exception {
         readFile.ReadFileGivenFile(new File("out.csv"));
     }
+
 
     //Wants to make sure that the system keeps running even though it happens something that shouldn't happen, the user will get a message
     //TODO: corrected tested?

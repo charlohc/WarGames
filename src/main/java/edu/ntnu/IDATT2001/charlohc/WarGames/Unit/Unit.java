@@ -1,5 +1,9 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
+import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
+//TODO: test
+
 /**
  * Abstract super class Unit
  * Contains four attributes that describe the unit
@@ -9,7 +13,9 @@ public abstract class Unit{
     private int health;
     private final int attack;
     private final int armor;
+    private TerrainTypesENUM terrainTypesENUM;
 
+//TODO: can attack and armor be zero?
     /**
      * Description of the attributes
      * @param name short descriptive name
@@ -21,11 +27,12 @@ public abstract class Unit{
         if(name.isBlank()){throw new IllegalArgumentException("Name can not be blank");}
         if(health < 0){throw new IllegalArgumentException("Health can not be negative");}
         if(attack < 0){throw new IllegalArgumentException("Attack value can not be negative");}
-        if(armor < 0) {throw new IllegalArgumentException("Armor value can not be negative");        }
+        if(armor < 0) {throw new IllegalArgumentException("Armor value can not be negative");}
         this.name = name;
         this.health = health;
         this.attack = attack;
         this.armor = armor;
+        terrainTypesENUM = null;
     }
 
     /**
@@ -60,6 +67,16 @@ public abstract class Unit{
         return armor;
     }
 
+    public TerrainTypesENUM getTerrainType(){
+        return terrainTypesENUM;
+    }
+
+    public void setTerrainTypes(TerrainTypesENUM terrainTypesENUM){
+       if(terrainTypesENUM ==  null){throw new IllegalArgumentException("Terrain type can not be null");}
+       this.terrainTypesENUM = terrainTypesENUM;
+    }
+
+//TODO: correct?
     /**
      * Changes the health value
      * @param health
@@ -81,6 +98,9 @@ public abstract class Unit{
      */
     public abstract int getResistBonus();
 
+
+    public abstract UnitTypeENUM getUnitType();
+
     /**
      * Methode that changes the health of the opponent after an attack, the health value cannot be negative, therefore
      * the lowest health value the opponent can archive is zero
@@ -95,6 +115,7 @@ public abstract class Unit{
             opponent.setHealth(0);
         }
     }
+
 
     /**
      * Methode that return information about the unit

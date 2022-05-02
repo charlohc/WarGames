@@ -1,6 +1,7 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
 
-import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
+import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
 
 /**
  * InfantryUnit subclass of Unit
@@ -21,6 +22,9 @@ public class InfantryUnit extends Unit {
      */
     @Override
     public int getAttackBonus() {
+        if(this.getTerrainType().equals(TerrainTypesENUM.FORREST)){
+            return 4;
+        }
         return 2;
     }
 
@@ -30,7 +34,15 @@ public class InfantryUnit extends Unit {
      */
     @Override
     public int getResistBonus() {
+        if(this.getTerrainType().equals(TerrainTypesENUM.FORREST)){
+            return 3;
+        }
         return 1;
+    }
+
+    @Override
+    public UnitTypeENUM getUnitType() {
+        return UnitTypeENUM.INFANTRY;
     }
 
 }
