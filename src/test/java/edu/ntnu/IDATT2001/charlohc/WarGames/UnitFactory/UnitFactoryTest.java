@@ -1,5 +1,6 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CavalryUnit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CommanderUnit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.InfantryUnit;
@@ -8,7 +9,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
+//TODO: test with terrain
 class UnitFactoryTest {
 CavalryUnit cavalryUnit;
 CommanderUnit commanderUnit;

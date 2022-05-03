@@ -18,9 +18,6 @@ CavalryUnit cavalryUnit1, cavalryUnit2, cavalryUnit3;
         cavalryUnit1 = new CavalryUnit("Cavalry Unit One", 100, 20, 12);
         cavalryUnit2 = new CavalryUnit("Cavalry Unit Two", 100, 20, 12);
         cavalryUnit3 = new CavalryUnit("Cavalry Unit three",100,20,12);
-        cavalryUnit1.setTerrainTypes(TerrainTypesENUM.HILL);
-        cavalryUnit2.setTerrainTypes(TerrainTypesENUM.PLAINS);
-        cavalryUnit3.setTerrainTypes(TerrainTypesENUM.FORREST);
     }catch (Exception e) {
         System.out.println("Error: " + e.getMessage());
     }
@@ -66,7 +63,7 @@ CavalryUnit cavalryUnit1, cavalryUnit2, cavalryUnit3;
     }
 
     @Test
-    @DisplayName("Health after first attack on cavalry unit in the terrain forrest is zero")
+    @DisplayName("Health bonus after first attack on cavalry unit in the terrain forrest is zero")
     void HealthAfterFirstAttackTerrainTypeForrest(){
         Assertions.assertEquals(0,cavalryUnit3.getResistBonus());
     }
