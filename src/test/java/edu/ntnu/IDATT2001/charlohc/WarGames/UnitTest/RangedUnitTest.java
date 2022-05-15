@@ -124,4 +124,38 @@ class RangedUnitTest {
         }
     }
 
+    //TODO: test attack terrain plains
+
+    @Nested
+    @DisplayName("Test attack methode when terrain type is plains")
+    class attackTerrainPlains{
+        //100 - (15 + 3 ) + (8 + 6) = 96
+        @Test
+        public void HealthAfterFirstAttackTerrainTypePlains() {
+            rangedUnit3.attack(rangedUnit3);
+            assertEquals(96, rangedUnit3.getHealth());
+        }
+
+        //96 - (15 + 3 ) + (8 + 4) = 90
+        @Test
+        public void HealthAfterSecondAttackTerrainTypePlains() {
+            rangedUnit3.attack(rangedUnit3);
+            rangedUnit3.attack(rangedUnit3);
+            assertEquals(90, rangedUnit3.getHealth());
+        }
+
+        //90 - (15 + 3 ) + (8 + 2) = 82
+        @Test
+        public void HealthAfterThirdAttackTerrainTypePlains() {
+            rangedUnit3.attack(rangedUnit3);
+            rangedUnit3.attack(rangedUnit3);
+            rangedUnit3.attack(rangedUnit3);
+            assertEquals(82, rangedUnit3.getHealth());
+        }
+    }
+
+    @Test
+    public void differentTerrainsAttack(){
+        assertThrows(IllegalArgumentException.class,() -> rangedUnit1.attack(rangedUnit3));
+    }
 }

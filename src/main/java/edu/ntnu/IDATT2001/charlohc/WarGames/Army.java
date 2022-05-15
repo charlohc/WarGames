@@ -137,7 +137,7 @@ public class Army {
     }
 
     /**
-     * Methode that gets a random number
+     * Methode that gets a random number in range 1 - 2
      * @return random int
      */
     public int getRandomNumber(){

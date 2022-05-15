@@ -1,53 +1,67 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CavalryUnit;
-import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CommanderUnit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.InfantryUnit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.RangedUnit;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.*;
 
+import java.util.Calendar;
+
+//TODO: add terrain and more tests
 class BattleTest {
-    Army humans,orcs;
+    Army humans, orcs;
     Battle battle;
+    InfantryUnit infantryUnit;
+    RangedUnit rangedUnit;
+    CavalryUnit cavalryUnit, cavalryUnit2;
 
     @BeforeEach
     public void reset() {
-        try{
+        humans = new Army("humans");
+        orcs = new Army("Orcs");
 
-         humans = new Army("Human army", new ArrayList<>());
-         orcs = new Army("Orcish horde", new ArrayList<>());
-         battle = new Battle(humans, orcs);
+        infantryUnit = new InfantryUnit("infantry",40,10,10);
+        cavalryUnit = new CavalryUnit("cavalry orcs", 40,10,10);
+        cavalryUnit2 = new CavalryUnit("cavalry humans", 40,10,10);
+        rangedUnit = new RangedUnit("ranged",40,10,10);
 
-        }catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        humans.addUnit(infantryUnit);
+        humans.addUnit(cavalryUnit2);
+        orcs.addUnit(rangedUnit);
+        orcs.addUnit(cavalryUnit);
 
-        for (int i = 0; i < 500; i++) {
-            humans.addUnit(new InfantryUnit("Footman", 100));
-            orcs.addUnit(new InfantryUnit("Grunt", 100));
-        }
-
-        for (int i = 0; i < 200; i++) {
-            humans.addUnit(new RangedUnit("Archer", 100));
-            orcs.addUnit(new RangedUnit("Spearman", 100));
-        }
-
-        for (int i = 0; i < 100; i++) {
-            humans.addUnit(new CavalryUnit("Knight", 100));
-            orcs.addUnit(new CavalryUnit("Raider", 100));
-        }
-
-        humans.addUnit(new CommanderUnit("Mountain King", 180));
-        orcs.addUnit(new CommanderUnit("gulDan", 180));
-
-        System.out.println("The winner of the battle is : " + battle.simulate().toString());
+        battle = new Battle(humans,orcs, TerrainTypesENUM.PLAINS);
     }
+
+    @Nested
+    @DisplayName("Test of constructor")
+    class constructorTest {
+        @Test
+        void getArmyOne() {
+            Assertions.assertEquals(humans, battle.getArmyOne());
+        }
+
+        @Test
+        void getArmyTwo(){
+            Assertions.assertEquals(orcs,battle.getArmyTwo());
+        }
+
+        @Test
+        void getTerrain(){
+            Assertions.assertEquals(TerrainTypesENUM.PLAINS, battle.getTerrainTypes());
+        }
+    }
+
     @Test
-    public void testSimulate(){
-        assertTrue(battle.simulate().equals(humans) || battle.simulate().equals(orcs));
+    void getTerrainFromUnit(){
+        Assertions.assertEquals(TerrainTypesENUM.PLAINS, humans.getInfantryUnits().get(0).getTerrainType());
     }
+
+    @Test
+    void testSimulate(){
+        Assertions.assertTrue(battle.simulate().equals(humans) || battle.simulate().equals(orcs));
+    }
+
 }
 

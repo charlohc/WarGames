@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//TODO: go trough and make sure not missing any tests
 class ArmyTest {
     Army army;
     Unit unit1, unit2, unit3,unit4;
@@ -37,15 +38,13 @@ class ArmyTest {
 
     @Test
     public void AddAllUnitTest(){
-        army.removeUnit(unit1);
-        army.removeUnit(unit2);
+        ArrayList<Unit> allUnitsList = new ArrayList<>();
 
-        ArrayList<Unit> allUnitsTest = new ArrayList<>();
+        allUnitsList.add(unit1);
+        allUnitsList.add(unit2);
+        army.addAllUnits(allUnitsList);
 
-        allUnitsTest.add(unit1);
-        allUnitsTest.add(unit2);
-        army.addAllUnits(allUnitsTest);
-        assertEquals(allUnitsTest.size(),2);
+        assertEquals(allUnitsList.size(),2);
     }
 
     @Test

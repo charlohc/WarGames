@@ -82,7 +82,7 @@ public abstract class Unit{
      * @param health
      */
     public void setHealth(int health) {
-        if(health < 0){setHealth(0);}
+        if(health < 0){health = 0;}
         this.health = health;
     }
 
@@ -108,12 +108,16 @@ public abstract class Unit{
      */
 
     public void attack(Unit opponent) {
-        int healthOpponent = opponent.health - (this.attack + this.getAttackBonus()) + (opponent.getArmor() + getResistBonus());
-        opponent.setHealth(healthOpponent);
-
+        if(this.getTerrainType() != opponent.getTerrainType()){
+            throw new IllegalArgumentException("The two opponents need to have the same terrain type");
+        }
         if(opponent.getHealth() < 0){
             opponent.setHealth(0);
         }
+
+        int healthOpponent = opponent.health - (this.attack + this.getAttackBonus()) + (opponent.getArmor() + getResistBonus());
+        opponent.setHealth(healthOpponent);
+
     }
 
 

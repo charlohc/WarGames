@@ -1,5 +1,6 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 
 /**
@@ -7,19 +8,37 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
  * simulates a battle between two armies
  */
 public class Battle {
-    private final Army armyOne;
-    private final Army armyTwo;
+    private final Army armyOne, armyTwo;
+    private final TerrainTypesENUM terrainTypes;
+    private Unit unit1, unit2;
 
     /**
      *
      * @param armyOne an army, which consists of several units
      * @param armyTwo an army, which consists of several units
      */
-    public Battle(Army armyOne, Army armyTwo) {
+    public Battle(Army armyOne, Army armyTwo, TerrainTypesENUM terrainTypes) {
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
+        this.terrainTypes = terrainTypes;
+
+        armyOne.getAllUnits().forEach(unit -> unit.setTerrainTypes(terrainTypes));
+        armyTwo.getAllUnits().forEach(unit -> unit.setTerrainTypes(terrainTypes));
     }
 
+    public Army getArmyOne() {
+        return armyOne;
+    }
+
+    public Army getArmyTwo() {
+        return armyTwo;
+    }
+
+    public TerrainTypesENUM getTerrainTypes() {
+        return terrainTypes;
+    }
+
+    //TODO: make so that two units fight until one is done, then another can try
     /**
      * Methode that simulates a battle between two armies. The armies battle as long as they both have any units.
      * A random unit from the first army attacks a random unit from the other,
@@ -29,45 +48,43 @@ public class Battle {
      * @return army
      */
     public Army simulate() {
+
         while(armyOne.hasUnit() && armyTwo.hasUnit()) {
-            Unit unit1 = armyOne.getRandomUnit();
-            Unit unit2 = armyTwo.getRandomUnit();
+            unit1 = armyOne.getRandomUnit();
+            unit2 = armyTwo.getRandomUnit();
 
-            if (armyOne.getRandomNumber() == 1) {
-                unit1.attack(unit2);
+            while (unit1.getHealth() != 0 && unit2.getHealth() != 0) {
 
-                if (unit2.getHealth() == 0) {
-                    armyTwo.removeUnit(unit2);
-                }
-                if (!armyTwo.hasUnit()) {
-                    break;
-                }
+                if (armyOne.getRandomNumber() == 1) {
+                    unitOneAttack();
 
-                unit2.attack(unit1);
-
-                if (unit1.getHealth() == 0) {
-                    armyOne.removeUnit(unit1);
-                }
-
-            } else {
-                unit2.attack(unit1);
-                if (unit1.getHealth() == 0) {
-                    armyOne.removeUnit(unit1);
-                }
-                if (!armyOne.hasUnit()) {
-                    break;
-                }
-                unit1.attack(unit2);
-
-                if (unit2.getHealth() == 0) {
-                    armyTwo.removeUnit(unit2);
+                } else {
+                    unitTwoAttack();
                 }
             }
         }
+
         if(!armyOne.hasUnit()){
             return armyTwo;
         }else {
             return armyOne;
+        }
+    }
+
+    public void unitOneAttack(){
+        unit1.attack(unit2);
+
+        if (unit2.getHealth() == 0) {
+            armyTwo.removeUnit(unit2);
+
+        }
+    }
+
+    public void unitTwoAttack(){
+        unit2.attack(unit1);
+
+        if (unit1.getHealth() == 0) {
+            armyOne.removeUnit(unit1);
         }
     }
 

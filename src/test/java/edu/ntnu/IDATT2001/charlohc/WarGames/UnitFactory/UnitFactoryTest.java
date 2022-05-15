@@ -1,23 +1,20 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
-import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CavalryUnit;
-import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CommanderUnit;
-import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.InfantryUnit;
-import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.RangedUnit;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-//TODO: test with terrain
+import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.*;
+import org.junit.jupiter.api.*;
+
+import java.util.ArrayList;
+import java.util.List;
+
 class UnitFactoryTest {
 CavalryUnit cavalryUnit;
 CommanderUnit commanderUnit;
 InfantryUnit infantryUnit;
 RangedUnit rangedUnit;
+List<Unit> listCavalryUnits;
 UnitFactory unitFactory;
 
-//TODO: do I have to test everything for everyone? test terrain
     @BeforeEach
     void setUp() {
         unitFactory = new UnitFactory();
@@ -25,103 +22,102 @@ UnitFactory unitFactory;
         commanderUnit = (CommanderUnit) unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Commander",90);
         infantryUnit = (InfantryUnit) unitFactory.createUnitByType(UnitTypeENUM.INFANTRY,"Infantry",80);
         rangedUnit = (RangedUnit) unitFactory.createUnitByType(UnitTypeENUM.RANGED,"Ranged",100);
+
+        listCavalryUnits = unitFactory.createListOfUnits(4,UnitTypeENUM.CAVALRY,"Cavalry units",50);
     }
 
-    @Test
-    void testCorrectType(){
-        Assertions.assertEquals(UnitTypeENUM.RANGED,rangedUnit.getUnitType());
+    @Nested
+    @DisplayName("Test createUnitByType method in UnitFactory class")
+    class testCreateUnitByTypeMethod {
+        @Test
+        void correctUnitType() {
+            Assertions.assertEquals(UnitTypeENUM.RANGED, rangedUnit.getUnitType());
+        }
+
+        @Test
+        void getName() {
+            Assertions.assertEquals("Cavalry", cavalryUnit.getName());
+        }
+
+        @Test
+        void getHealth() {
+            Assertions.assertEquals(100, cavalryUnit.getHealth());
+        }
+
+        @Test
+        void setHealth() {
+            cavalryUnit.setHealth(50);
+            Assertions.assertEquals(50, cavalryUnit.getHealth());
+        }
+
+        @Test
+        void getArmour() {
+            Assertions.assertEquals(12, cavalryUnit.getArmor());
+        }
+
+        @Test
+        void getAttack() {
+            Assertions.assertEquals(20, cavalryUnit.getAttackValue());
+        }
     }
 
-    @Test
-    void getName(){
-        Assertions.assertEquals("Cavalry",cavalryUnit.getName());
-    }
+    @Nested
+    @DisplayName("Test createListOfUnits method in UnitFactory class")
+    class testCreateListOfUnitsMethod{
 
-    @Test
-    void getHealth(){
-        Assertions.assertEquals(100,cavalryUnit.getHealth());
-    }
+        @Test
+        void getName(){
+            for (Unit listCavalryUnit : listCavalryUnits) {
+                Assertions.assertEquals("Cavalry units", listCavalryUnit.getName());
+            }
+        }
 
-    @Test
-    void setHealth(){
-        cavalryUnit.setHealth(50);
-        Assertions.assertEquals(50,cavalryUnit.getHealth());
-    }
+        @Test
+        void getType(){
+            for (Unit listCavalryUnit : listCavalryUnits) {
+                Assertions.assertEquals(UnitTypeENUM.CAVALRY, listCavalryUnit.getUnitType());
+            }
+        }
 
-    @Test
-    void getArmour(){
-        Assertions.assertEquals(12, cavalryUnit.getArmor());
-    }
+        @Test
+        void getHealth(){
+            for (Unit listCavalryUnit : listCavalryUnits) {
+                Assertions.assertEquals(50, listCavalryUnit.getHealth());
+            }
+        }
 
-    @Test
-    void getAttack(){
-        Assertions.assertEquals(20,cavalryUnit.getAttackValue());
-    }
+        @Test
+        void getSize(){
+            Assertions.assertEquals(4, listCavalryUnits.size());
+        }
 
-    @Test
-    @DisplayName("Get resist bonus after first attack ranged unit")
-    void getResistBonusAfterAttack(){
-        Assertions.assertEquals(6,rangedUnit.getResistBonus());
     }
+    
+    @Nested
+    @DisplayName("Negative tests")
+    class negative {
+        @Test
+        void setNegativeHealth() {
+            Assertions.assertThrows(IllegalArgumentException.class, () -> cavalryUnit.setHealth(-1));
+        }
 
-    @Test
-    @DisplayName("Get resist bonus after second attack ranged unit")
-    void getResistBonusAfterSecondAttack(){
-        rangedUnit.getResistBonus();
-        Assertions.assertEquals(4,rangedUnit.getResistBonus());
-    }
+        @Test
+        @DisplayName("Throw Exception when the name parameter is null")
+        void nameNullException() {
+            Assertions.assertThrows(NullPointerException.class, () -> unitFactory.createUnitByType(UnitTypeENUM.INFANTRY, null, 100));
+        }
 
-    @Test
-    @DisplayName("Get resist bonus after second attack ranged unit")
-    void getResistBonusAfterThirdAttack(){
-        rangedUnit.getResistBonus();
-        rangedUnit.getResistBonus();
-        Assertions.assertEquals(2,rangedUnit.getResistBonus());
-    }
+        @Test
+        @DisplayName("Throw Exception when the unit type parameter is null")
+        void typeNullException() {
+            Assertions.assertThrows(NullPointerException.class, () -> unitFactory.createUnitByType(null, "Cavalry", 100));
+        }
 
-    @Test
-    @DisplayName("Get attack bonus after first attack cavalry unit")
-    void getAttackBonusAfterFirst(){
-        Assertions.assertEquals(6,cavalryUnit.getAttackBonus());
-    }
+        @Test
+        @DisplayName("Throw Exception when the health int in parameter is negative")
+        void negativeHealthException() {
+            Assertions.assertThrows(IllegalArgumentException.class, () -> unitFactory.createUnitByType(UnitTypeENUM.RANGED, "ranged", -1));
+        }
 
-    @Test
-    @DisplayName("Get attack bonus after second attack cavalry unit")
-    void getAttackBonusAfterSecond(){
-        cavalryUnit.getAttackBonus();
-        Assertions.assertEquals(2, cavalryUnit.getAttackBonus());
-    }
-
-    @Test
-    @DisplayName("Test attack methode where commander unit attacks infantry unit")
-    void healthAfterFirstAttack(){
-        commanderUnit.attack(infantryUnit);
-        Assertions.assertEquals(63, infantryUnit.getHealth());
-    }
-
-    @Test
-    @DisplayName("Test attack methode where commander unit attacks infantry unit twice")
-    void healthAfterSecondAttack(){
-        commanderUnit.attack(infantryUnit);
-        commanderUnit.attack(infantryUnit);
-        Assertions.assertEquals(50, infantryUnit.getHealth());
-    }
-
-    @Test
-    @DisplayName("Throw Exception when the name parameter is null")
-    void nameNullException(){
-        Assertions.assertThrows(NullPointerException.class,() -> unitFactory.createUnitByType(UnitTypeENUM.INFANTRY,null,100));
-    }
-
-    @Test
-    @DisplayName("Throw Exception when the unit type parameter is null")
-    void typeNullException(){
-        Assertions.assertThrows(NullPointerException.class,() -> unitFactory.createUnitByType(null,"Cavalry",100));
-    }
-
-    @Test
-    @DisplayName("Throw Exception when the health int in parameter is negative")
-    void negativeHealthException(){
-        Assertions.assertThrows(IllegalArgumentException.class,() -> unitFactory.createUnitByType(UnitTypeENUM.RANGED,"ranged",-1));
     }
 }
