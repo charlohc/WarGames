@@ -26,7 +26,8 @@ public class MainController {
 
     protected ObservableList<Army> armies = FXCollections.observableArrayList();
     protected Unit unit;
-    protected Army currentArmy;
+    protected Army currentArmyOne;
+    protected Army currentArmyTwo;
 
     /**
      * Method to show a given .fxml file when executed.

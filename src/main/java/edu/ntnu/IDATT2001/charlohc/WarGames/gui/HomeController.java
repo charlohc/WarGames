@@ -10,7 +10,7 @@ public class HomeController extends ChildController {
     }
 
     public void createArmies(ActionEvent event) {
-        parent.show("createArmies.fxml");
+        parent.show("createArmyOne.fxml");
     }
 
     public void importArmies(ActionEvent event) {

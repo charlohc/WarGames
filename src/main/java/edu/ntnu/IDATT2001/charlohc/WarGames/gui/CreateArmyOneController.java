@@ -22,7 +22,7 @@ import javafx.scene.text.Text;
 import java.util.List;
 
 
-public class CreateArmiesController extends ChildController{
+public class CreateArmyOneController extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
 
@@ -43,7 +43,7 @@ public class CreateArmiesController extends ChildController{
     TextField nameArmy,nameUnit;
 
     @FXML
-    Button addUnit,addFiveUnits,viewArmy;
+    Button addUnit,addFiveUnits,viewArmy, confirm;
 
     @FXML
     Text armour,attack,info;
@@ -58,7 +58,20 @@ public class CreateArmiesController extends ChildController{
 
     @Override
     public void load() {
-    currentArmy = parent.currentArmy;
+    currentArmy = parent.currentArmyOne;
+    if(parent.currentArmyOne != null){
+        nameArmy.setDisable(true);
+        nameArmy.setText(currentArmy.getName());
+
+        viewArmy.setDisable(false);
+        confirm.setDisable(true);
+        addUnit.setDisable(false);
+        addFiveUnits.setDisable(false);
+
+        numbersOfUnits = currentArmy.getAllUnits().size();
+        System.out.println(currentArmy.getAllUnits().size());
+
+    }
     calvaryImgView.setImage(calvaryImg);
     commanderImgView.setImage(commanderImg);
     infantryImgView.setImage(infantryImg);
@@ -80,6 +93,8 @@ public class CreateArmiesController extends ChildController{
             addUnit.setDisable(false);
             addFiveUnits.setDisable(false);
             viewArmy.setDisable(false);
+
+            parent.currentArmyOne = currentArmy;
         }
     }
 

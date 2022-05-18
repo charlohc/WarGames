@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.CreateArmiesController">
+<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.CreateArmyOneController">
    <children>
       <Label layoutX="390.0" layoutY="25.0" style="-fx-font-weight: bold;" text="Create Army One">
          <font>
@@ -98,7 +98,7 @@
                </font>
             </Text>
          </children></Pane>
-      <Button layoutX="246.0" layoutY="139.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#newArmy" text="Confirm" />
+      <Button fx:id="confirm" layoutX="246.0" layoutY="139.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#newArmy" text="Confirm" />
       <Button fx:id="addFiveUnits" disable="true" layoutX="284.0" layoutY="500.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#addFiveUnits" text="Quick add five">
          <font>
             <Font size="14.0" />
