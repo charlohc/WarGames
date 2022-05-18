@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.HomeController">
+   <children>
+      <Text layoutX="270.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="War Games, a simulation game between two armies" wrappingWidth="338.626953125">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="150.0" layoutY="160.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Do you want to create your own armies, import armies from a file or use a default army setup?" wrappingWidth="598.603515625">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Button layoutX="100.0" layoutY="275.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#createArmies" text="Create armies">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="350.0" layoutY="275.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#importArmies" text="Import armies">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="600.0" layoutY="275.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#defaultArmies" text="Default armies">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

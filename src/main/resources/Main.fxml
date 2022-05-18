@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="scenePane" minHeight="750.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.MainController">
+   <top>
+      <Pane prefHeight="79.0" prefWidth="824.0" style="-fx-background-color: C1DBE3; -fx-border-color: bLACK;" BorderPane.alignment="CENTER">
+         <children>
+            <Label layoutX="369.0" layoutY="23.0" prefHeight="34.0" prefWidth="269.0" style="-fx-font-weight: bold;" text="War Games">
+               <font>
+                  <Font name="Copperplate Gothic Light" size="30.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </top>
+</BorderPane>

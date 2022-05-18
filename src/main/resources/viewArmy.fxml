@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.ViewArmyController">
+   <children>
+      <Label layoutX="390.0" layoutY="25.0" text="View Army One">
+         <font>
+            <Font name="System Bold" size="16.0" />
+         </font></Label>
+      <Button layoutX="45.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#goBack" text="Go back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button layoutX="700.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#createArmyTwo" text="Create Army Two">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="375.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#removeUnit" text="Remove">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Pane layoutX="102.0" layoutY="154.0" prefHeight="388.0" prefWidth="700.0">
+         <children>
+            <TableView fx:id="tableView" layoutX="80.0" layoutY="62.0" prefHeight="257.0" prefWidth="563.0">
+              <columns>
+                <TableColumn fx:id="typeColumn" prefWidth="208.19998168945312" text="Unit Type" />
+                <TableColumn fx:id="nameColumn" minWidth="0.0" prefWidth="202.199951171875" text="Name" />
+                  <TableColumn fx:id="healthColumn" minWidth="0.0" prefWidth="152.800048828125" text="Health" />
+              </columns>
+            </TableView>
+         </children>
+      </Pane>
+      <Text layoutX="280.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can se the units you have added to the army one">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="300.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="you can remove the units and go back and add more">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

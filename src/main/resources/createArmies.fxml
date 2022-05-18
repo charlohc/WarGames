@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.CreateArmiesController">
+   <children>
+      <Label layoutX="390.0" layoutY="25.0" style="-fx-font-weight: bold;" text="Create Army One">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Text layoutX="340.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you create the first of two armies">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="130.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In each army there will be several units which you will create, on the next page you can se and edit the units">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+      <Text layoutX="48.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Name Army One" wrappingWidth="128.6796875" />
+      <TextField fx:id="nameArmy" layoutX="48.0" layoutY="144.0" minHeight="30.0" minWidth="130.0" />
+      <Button layoutX="45.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#goBack" text="Go back">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="viewArmy" disable="true" layoutX="700.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#viewArmy" text="View army">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Pane layoutX="25.0" layoutY="191.0" prefHeight="368.0" prefWidth="838.0" style="-fx-border-color: black;">
+         <children>
+            <Text fx:id="attack" layoutX="25.0" layoutY="238.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Text fx:id="armour" layoutX="258.0" layoutY="229.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+         </children></Pane>
+      <Pane fx:id="infantry" layoutX="700.0" layoutY="400.0" onMouseClicked="#selectedUnitType" prefHeight="127.0" prefWidth="129.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="infantryImgView" fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../infantry.png" />
+               </image></ImageView>
+         </children></Pane>
+      <Pane fx:id="ranged" layoutX="525.0" layoutY="400.0" onMouseClicked="#selectedUnitType" prefHeight="127.0" prefWidth="129.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="rangedImgView" fitHeight="100.0" fitWidth="130.0" layoutX="15.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../ranged.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Pane fx:id="commander" layoutX="700.0" layoutY="225.0" onMouseClicked="#selectedUnitType" prefHeight="127.0" prefWidth="129.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="commanderImgView" disable="true" fitHeight="100.0" fitWidth="100.0" layoutX="11.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../commander.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Pane fx:id="cavalry" layoutX="525.0" layoutY="225.0" onMouseClicked="#selectedUnitType" prefHeight="127.0" prefWidth="129.0" style="-fx-border-color: black;">
+         <children>
+            <ImageView fx:id="calvaryImgView" disable="true" fitHeight="100.0" fitWidth="130.0" layoutX="15.0" layoutY="5.0" preserveRatio="true">
+               <image>
+                  <Image url="@../../../cavalry.png" />
+               </image>
+            </ImageView>
+         </children></Pane>
+      <Text layoutX="525.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cavalry" />
+      <Text layoutX="700.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Commander" />
+      <Text layoutX="525.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ranged" />
+      <Text layoutX="700.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Infantry" />
+      <TextField fx:id="nameUnit" layoutX="48.0" layoutY="257.0" minHeight="30.0" minWidth="130.0" />
+      <Spinner fx:id="health" layoutX="284.0" layoutY="259.0" minHeight="30.0" minWidth="130.0" />
+      <Text layoutX="48.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Name Unit ">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="284.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Health">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="48.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Attack">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Text layoutX="284.0" layoutY="395.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;" text="Armour">
+         <font>
+            <Font size="14.0" />
+         </font></Text>
+      <Pane fx:id="infoPane" layoutX="259.0" layoutY="608.0" prefHeight="47.0" prefWidth="386.0">
+         <children>
+            <Text fx:id="info" layoutX="100.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+         </children></Pane>
+      <Button layoutX="246.0" layoutY="139.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#newArmy" text="Confirm" />
+      <Button fx:id="addFiveUnits" disable="true" layoutX="284.0" layoutY="500.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#addFiveUnits" text="Quick add five">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="addUnit" disable="true" layoutX="48.0" layoutY="500.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onMouseClicked="#addUnit" text="Add">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

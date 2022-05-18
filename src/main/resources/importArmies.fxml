@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.ImportArmiesController">
+   <children>
+      <Label layoutX="400.0" layoutY="60.0" prefHeight="25.0" prefWidth="203.0" style="-fx-font-weight: bold;" text="Import Armies">
+         <font>
+            <Font size="16.0" />
+         </font></Label>
+      <Button layoutX="45.0" layoutY="600.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#goBack" text="Go back">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+   </children>
+</Pane>

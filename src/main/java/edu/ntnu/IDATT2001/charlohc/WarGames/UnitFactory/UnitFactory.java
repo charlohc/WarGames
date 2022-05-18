@@ -8,7 +8,6 @@ import java.util.List;
 public class UnitFactory {
 
     public Unit createUnitByType(UnitTypeENUM unitType,String name, int health) {
-        Unit unit;
 
         return switch (unitType) {
             case CAVALRY -> new CavalryUnit(name, health);
