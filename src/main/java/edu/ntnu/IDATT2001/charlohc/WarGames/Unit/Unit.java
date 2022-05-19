@@ -1,5 +1,6 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
 
+import edu.ntnu.IDATT2001.charlohc.WarGames.Listener.ChangeInHealth;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
 //TODO: test
@@ -9,6 +10,7 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
  * Contains four attributes that describe the unit
  */
 public abstract class Unit{
+    private ChangeInHealth listener;
     private final String name;
     private int health;
     private final int attack;
@@ -79,11 +81,16 @@ public abstract class Unit{
 //TODO: correct?
     /**
      * Changes the health value
-     * @param health
+     * @param newHealth
      */
-    public void setHealth(int health) {
-        if(health < 0){health = 0;}
-        this.health = health;
+    public void setHealth(int newHealth) {
+        if(newHealth < 0){newHealth = 0;}
+
+        if (listener != null) {
+            listener.changeInHealth(this,this.getHealth(),newHealth);
+        }
+
+        this.health = newHealth;
     }
 
     /**
@@ -100,6 +107,10 @@ public abstract class Unit{
 
 
     public abstract UnitTypeENUM getUnitType();
+
+    public void setChangeInHealthListener(ChangeInHealth listener){
+        this.listener = listener;
+    }
 
     /**
      * Methode that changes the health of the opponent after an attack, the health value cannot be negative, therefore

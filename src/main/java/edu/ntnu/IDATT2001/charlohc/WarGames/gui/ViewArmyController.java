@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 public class ViewArmyController extends ChildController {
 
@@ -20,6 +21,9 @@ public class ViewArmyController extends ChildController {
     public TableColumn<Unit,String> nameColumn;
     public TableColumn<Unit,Integer> healthColumn;
 
+    @FXML
+    public Text armyName;
+
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
 
@@ -27,9 +31,10 @@ public class ViewArmyController extends ChildController {
     public void load() {
         currentArmy = parent.armies.get(0);
         this.units.addAll(currentArmy.getAllUnits());
-        tableView.setItems(units);
 
-        System.out.println(units.get(0));
+        armyName.setText(currentArmy.getName() + " army");
+
+        tableView.setItems(units);
         typeColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("unitType"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("name"));
         healthColumn.setCellValueFactory(new PropertyValueFactory<Unit, Integer>("health"));

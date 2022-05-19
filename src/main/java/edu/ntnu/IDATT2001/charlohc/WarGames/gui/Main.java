@@ -24,7 +24,7 @@ import java.io.IOException;
             MainController controller = loader.getController();
             controller.hostServices = getHostServices();
 
-            //root.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+            root.getStylesheets().add(getClass().getClassLoader().getResource("Style.css").toExternalForm());
 
             stage.setScene(new Scene(root));
             stage.setMinWidth(900);

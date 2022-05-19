@@ -96,7 +96,7 @@ public class Battle {
     public String toString() {
         return "Battle{" +
                 "armyOne=" + armyOne +
-                ", armyTwo=" + armyTwo +
+                ", armyTwo=" + armyTwo + ", terrain= " +  getTerrainTypes() +
                 '}';
     }
 }

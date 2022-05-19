@@ -9,6 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 
 public class ViewArmyTwo extends ChildController {
 
@@ -20,15 +21,20 @@ public class ViewArmyTwo extends ChildController {
     public TableColumn<Unit,String> nameColumn;
     public TableColumn<Unit,Integer> healthColumn;
 
+    @FXML
+    public Text armyName;
+
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
 
     @Override
     public void load() {
-        currentArmy = parent.armies.get(1);
+        currentArmy = parent.currentArmyTwo;
         this.units.addAll(currentArmy.getAllUnits());
-        tableView.setItems(units);
 
+        armyName.setText(currentArmy.getName() + " army");
+
+        tableView.setItems(units);
         typeColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("unitType"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("name"));
         healthColumn.setCellValueFactory(new PropertyValueFactory<Unit, Integer>("health"));
@@ -41,8 +47,10 @@ public class ViewArmyTwo extends ChildController {
         currentArmy.getAllUnits().remove(toRemove);
     }
 
+    public void battleScene(ActionEvent event) {
+        parent.show("battle.fxml");
+    }
     public void goBack(ActionEvent event) {
         parent.show("createArmyTwo.fxml");
     }
-
 }

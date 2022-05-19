@@ -1,0 +1,25 @@
+#scenePane {
+    -fx-background-color: #f3f3f3;
+    -fx-border-color: black;
+    -fx-stroke: 1.5;
+}
+
+
+.button{
+    -fx-max-width: 150 ;
+    -fx-max-height: 40;
+    -fx-font-size: 14;
+}
+.button:hover {
+    -fx-background-color:#ADD8E6;
+    -fx-border-color: black;
+}
+
+.text-field{
+    -fx-font-size: 14;
+}
+
+.table-view{
+    -fx-font-size: 14;
+}
+

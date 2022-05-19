@@ -28,6 +28,11 @@
                         <TableColumn fx:id="healthColumn" minWidth="0.0" prefWidth="152.800048828125" text="Health" />
                     </columns>
                 </TableView>
+            <Text fx:id="armyName" layoutX="80.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
             </children>
         </Pane>
         <Text layoutX="280.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can se the units you have added to the army two">
@@ -40,5 +45,9 @@
                 <Font size="14.0" />
             </font>
         </Text>
+      <Button layoutX="730.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#battleScene" text="Create battle scene">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
     </children>
 </Pane>

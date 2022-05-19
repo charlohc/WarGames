@@ -1,6 +1,7 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Battle;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
@@ -26,8 +27,8 @@ public class MainController {
 
     protected ObservableList<Army> armies = FXCollections.observableArrayList();
     protected Unit unit;
-    protected Army currentArmyOne;
-    protected Army currentArmyTwo;
+    protected Army currentArmyOne,currentArmyTwo;
+    protected Battle battle;
 
     /**
      * Method to show a given .fxml file when executed.
