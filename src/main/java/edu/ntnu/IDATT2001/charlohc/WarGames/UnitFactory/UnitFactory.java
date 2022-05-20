@@ -21,7 +21,7 @@ public class UnitFactory {
     public List<Unit> createListOfUnits(int numberOfUnits, UnitTypeENUM unitType, String name, int health) throws IllegalArgumentException{
         ArrayList<Unit> newListOfUnits = new ArrayList<>();
         for (int i = 0; i < numberOfUnits; i++) {
-            newListOfUnits.add(createUnitByType(unitType, name, health));
+            newListOfUnits.add(createUnitByType(unitType, name+(i+1), health));
         }
         return newListOfUnits;
     }

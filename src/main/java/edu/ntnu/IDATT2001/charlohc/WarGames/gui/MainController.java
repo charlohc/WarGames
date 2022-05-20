@@ -2,6 +2,7 @@ package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Battle;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
@@ -29,6 +30,7 @@ public class MainController {
     protected Unit unit;
     protected Army currentArmyOne,currentArmyTwo;
     protected Battle battle;
+    protected TerrainTypesENUM terrainTypes;
 
     /**
      * Method to show a given .fxml file when executed.

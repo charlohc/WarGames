@@ -153,6 +153,10 @@ public class Army {
         return sb.toString();
     }
 
+    public Boolean containsUnit(Unit unit){
+        return getAllUnits().contains(unit);
+    }
+
     /**
      * Methode that return information about the unit
      * @return name, units

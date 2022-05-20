@@ -21,8 +21,8 @@ public class ListenerTest implements ChangeInHealth {
         humans = new Army("humans");
         orcs = new Army("Orcs");
 
-        infantryUnit = new InfantryUnit("infantry", 40, 10, 10);
-        rangedUnit = new RangedUnit("ranged", 40, 10, 10);
+        infantryUnit = new InfantryUnit("infantry", 100, 20, 10);
+        rangedUnit = new RangedUnit("ranged", 100, 20, 10);
         rangedUnit.setTerrainTypes(TerrainTypesENUM.PLAINS);
         infantryUnit.setTerrainTypes(TerrainTypesENUM.PLAINS);
 
@@ -34,23 +34,21 @@ public class ListenerTest implements ChangeInHealth {
     @Test
     void testHealthChange(){
         infantryUnit.setChangeInHealthListener(this);
+        rangedUnit.setChangeInHealthListener(this);
         rangedUnit.attack(infantryUnit);
         System.out.println(infantryUnit.getHealth());
 
         rangedUnit.attack(infantryUnit);
         System.out.println(infantryUnit.getHealth());
 
-        rangedUnit.attack(infantryUnit);
-        System.out.println(infantryUnit.getHealth());
+        infantryUnit.attack(rangedUnit);
 
-        rangedUnit.attack(infantryUnit);
-        System.out.println(infantryUnit.getHealth());
 
     }
 
     @Override
     public void changeInHealth(Unit unit, int startHealth, int currentHealth) {
-        System.out.println("change");
+        System.out.println("change in health " + unit.getName());
     }
 }
 

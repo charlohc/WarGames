@@ -62,7 +62,6 @@ public class CreateArmyTwoController extends ChildController{
         System.out.println(currentArmyTwo);
 
         if(currentArmyTwo != null){
-            System.out.println("ikke null");
             armyName.setDisable(true);
             armyName.setText(currentArmyTwo.getName());
 

@@ -59,8 +59,9 @@ class BattleTest {
     }
 
     @Test
-    void testSimulate(){
+    void testSimulate() throws InterruptedException {
         Assertions.assertTrue(battle.simulate().equals(humans) || battle.simulate().equals(orcs));
+        System.out.println(battle.simulate());
     }
 
 }

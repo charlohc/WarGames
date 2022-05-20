@@ -43,7 +43,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Pane layoutX="249.0" layoutY="607.0" prefHeight="40.0" prefWidth="408.0">
+      <Pane fx:id="infoPane" layoutX="249.0" layoutY="607.0" prefHeight="40.0" prefWidth="408.0">
          <children>
             <Text fx:id="infoBattle" layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>

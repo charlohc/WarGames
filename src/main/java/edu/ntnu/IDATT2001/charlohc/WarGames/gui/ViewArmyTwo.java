@@ -50,6 +50,7 @@ public class ViewArmyTwo extends ChildController {
     public void battleScene(ActionEvent event) {
         parent.show("battle.fxml");
     }
+
     public void goBack(ActionEvent event) {
         parent.show("createArmyTwo.fxml");
     }

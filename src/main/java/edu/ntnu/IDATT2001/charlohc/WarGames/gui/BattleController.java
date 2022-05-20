@@ -7,10 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
@@ -21,7 +18,7 @@ public class BattleController extends ChildController{
     TerrainTypesENUM terrainType;
     Battle battle;
 
-    @FXML public Pane background;
+    @FXML public Pane background, infoPane;
 
     @FXML public Text Vs, stats, infoBattle;
 
@@ -32,6 +29,17 @@ public class BattleController extends ChildController{
         armyOne = parent.currentArmyOne;
         armyTwo = parent.currentArmyTwo;
         battle = parent.battle;
+        terrainType = parent.terrainTypes;
+
+        if(terrainType != null){
+            System.out.println("not null");
+            enableButtons();
+            infoBattle.setText("You have chosen the terrain: " + terrainType.toString() + "!");
+            infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+        }
+
+        System.out.println("null");
+
 
         Vs.setText(armyOne.getName() + " VS. " + armyTwo.getName());
     }
@@ -71,8 +79,12 @@ public class BattleController extends ChildController{
     }
 
     public void confirmTerrain(ActionEvent event) {
+        infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+        infoBattle.setText("You have chosen the terrain type: " + terrainType.toString() + "! \n you can now start the simulation");
+
         battle = new Battle(armyOne,armyTwo,terrainType);
-        System.out.println(battle);
+        parent.battle = battle;
+        parent.terrainTypes = terrainType;
     }
 
     public void simulateBattle(ActionEvent event) {
