@@ -144,7 +144,6 @@ public class Army {
         return (int) (Math.random() * 2);
     }
 
-
     public String removeBracketsUnitsList(){
         StringBuilder sb = new StringBuilder();
         for(Unit unit: units){

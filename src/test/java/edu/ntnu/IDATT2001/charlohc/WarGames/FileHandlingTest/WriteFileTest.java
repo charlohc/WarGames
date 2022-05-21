@@ -3,6 +3,8 @@ package edu.ntnu.IDATT2001.charlohc.WarGames.FileHandlingTest;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.WriteFile;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.*;
+import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
+import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,23 +16,27 @@ import java.util.ArrayList;
 class WriteFileTest {
     Army humans;
     WriteFile writeFile;
+    UnitFactory unitFactory;
 
     @BeforeEach
     public void reset() {
+        unitFactory = new UnitFactory();
         try {
-            humans = new Army("Human army", new ArrayList<>());
-            writeFile = new WriteFile(humans);
+            humans = new Army("Orcs army", new ArrayList<>());
+            writeFile = new WriteFile();
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-            humans.addUnit(new InfantryUnit("Footman", 100));
+            Unit infantry = unitFactory.createUnitByType(UnitTypeENUM.INFANTRY,"Footman", 100);
+            Unit ranged = unitFactory.createUnitByType(UnitTypeENUM.RANGED,"Archer", 70);
+            Unit cavalry = unitFactory.createUnitByType(UnitTypeENUM.CAVALRY,"Knight", 80);
+            Unit commander = unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Mountain King", 100);
 
-            humans.addUnit(new RangedUnit("Archer", 100));
-
-            humans.addUnit(new CavalryUnit("Knight", 100));
-
-            humans.addUnit(new CommanderUnit("Mountain King", 180));
+            humans.addUnit(infantry);
+            humans.addUnit(ranged);
+            humans.addUnit(cavalry);
+            humans.addUnit(commander);
 
             writeFile.printTxt(humans);
     }
@@ -38,7 +44,7 @@ class WriteFileTest {
 
     @Test
     public void TestWriteFileExist() {
-        File f = new File("out.csv");
+        File f = new File(humans.getName() + ".csv");
         Assertions.assertTrue(f.isFile() && !f.isDirectory());
     }
 }

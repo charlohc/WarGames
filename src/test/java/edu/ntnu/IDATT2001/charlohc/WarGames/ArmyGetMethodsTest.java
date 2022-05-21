@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 //TODO: go trough and make sure that does not miss any tests + test with terrains
 public class ArmyGetMethodsTest {
-    Army army;
+    Army army,army2;
     Unit cavalryUnit, infantryUnit, commanderUnit, rangedUnit, cavalryUnit2;
 
     @BeforeEach
@@ -28,6 +28,12 @@ public class ArmyGetMethodsTest {
             army.addUnit(commanderUnit);
             army.addUnit(rangedUnit);
             army.addUnit(cavalryUnit2);
+
+            army2 = new Army("Army 2");
+            cavalryUnit2 = new CavalryUnit("CavalryUnit 2",100);
+            army2.addUnit(cavalryUnit2);
+            cavalryUnit.setTerrainTypes(TerrainTypesENUM.PLAINS);
+            cavalryUnit2.setTerrainTypes(TerrainTypesENUM.PLAINS);
 
         }catch (Exception e) {
             System.out.println("Error: " + e.getMessage());

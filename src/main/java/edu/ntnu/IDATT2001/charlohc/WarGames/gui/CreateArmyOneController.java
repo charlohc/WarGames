@@ -1,6 +1,7 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
+import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.WriteFile;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
@@ -25,7 +26,7 @@ import java.util.List;
 public class CreateArmyOneController extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
-
+    WriteFile writeFile;
     UnitFactory unitFactory;
     UnitTypeENUM unitType;
     Unit newUnit, testUnit;
@@ -69,7 +70,6 @@ public class CreateArmyOneController extends ChildController{
         addFiveUnits.setDisable(false);
 
         numbersOfUnits = currentArmy.getAllUnits().size();
-        System.out.println(currentArmy.getAllUnits().size());
 
     }
     calvaryImgView.setImage(calvaryImg);
@@ -82,6 +82,7 @@ public class CreateArmyOneController extends ChildController{
         valueFactory1.setValue(1);
 
         unitFactory = new UnitFactory();
+        writeFile = new WriteFile();
     }
 
     public void newArmy(ActionEvent event) {
@@ -89,6 +90,7 @@ public class CreateArmyOneController extends ChildController{
             blankName();
         }else {
             currentArmy = new Army(nameArmy.getText());
+
             info.setText(nameArmy.getText() + " is ready for battle!");
             addUnit.setDisable(false);
             addFiveUnits.setDisable(false);
@@ -104,7 +106,9 @@ public class CreateArmyOneController extends ChildController{
         }else {
             newUnit = unitFactory.createUnitByType(unitType, nameUnit.getText(), health.getValue());
             units.add(newUnit);
+
             currentArmy.addUnit(newUnit);
+
             nameUnit.clear();
 
             numbersOfUnits++;
@@ -117,6 +121,7 @@ public class CreateArmyOneController extends ChildController{
            blankName();
         }else {
             newUnits = unitFactory.createListOfUnits(5, unitType, nameUnit.getText(), health.getValue());
+
             units.addAll(newUnit);
             currentArmy.addAllUnits(newUnits);
 
@@ -159,6 +164,7 @@ public class CreateArmyOneController extends ChildController{
 
     public void viewArmy(ActionEvent event){
         parent.armies.add(currentArmy);
+        writeFile.printTxt(currentArmy);
         parent.show("viewArmy.fxml");
 
     }

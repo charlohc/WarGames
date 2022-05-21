@@ -27,6 +27,7 @@ public abstract class Unit{
      */
     public Unit(String name, int health, int attack, int armor)throws IllegalArgumentException{
         if(name.isBlank()){throw new IllegalArgumentException("Name can not be blank");}
+        if(name.contains(",")){throw new IllegalArgumentException("Name can not contain: ','");}
         if(health < 0){throw new IllegalArgumentException("Health can not be negative");}
         if(attack < 0){throw new IllegalArgumentException("Attack value can not be negative");}
         if(armor < 0) {throw new IllegalArgumentException("Armor value can not be negative");}
@@ -138,8 +139,8 @@ public abstract class Unit{
      */
     @Override
     public String toString() {
-        return  "\n" + getClass().getSimpleName() + ", " + name  +
-                ", " + health ;
+        return  "\n" + getUnitType() + "," + name  +
+                "," + health ;
 
     }
 }

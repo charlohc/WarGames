@@ -101,7 +101,6 @@ public class Battle {
     }
 
 
-
     /**
      * Information about the army
      * @return armyOne, armyTwo

@@ -3,52 +3,74 @@ package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Battle;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Listener.ChangeInHealth;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import javafx.application.Platform;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.ProgressBar;
+import javafx.scene.control.Button;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+
 import java.util.ArrayList;
 
+//TODO: must make own armyCopy constructor
 public class SimulateBattleController extends ChildController implements ChangeInHealth {
-    Army armyOne,armyTwo;
-    Battle battle;
+    ObservableList<Army> armies;
+    Army armyOneOriginal, armyTwoOriginal,armyOneCopy, armyTwoCopy;
+    Battle copyBattle;
+    TerrainTypesENUM terrainType;
 
     @FXML public Text unitOne,unitTwo, armyOneName, armyTwoName, healthOne, healthTwo,winnerArmyText,unitsArmyOne,unitsArmyTwo;
     public Text oneAttackBonus, twoAttackBonus, oneResistBonus, twoResistBonus;
+    public Button startSimulation;
 
     @Override
     public void load() {
-        armyOne = parent.currentArmyOne;
-        armyTwo = parent.currentArmyTwo;
-        battle = parent.battle;
+        armyOneOriginal = parent.currentArmyOne;
+        armyTwoOriginal = parent.currentArmyTwo;
+        terrainType = parent.terrainTypes;
 
-        for(Unit unitOne : armyOne.getAllUnits()){
+        ArrayList<Unit> armyOneUnits = new ArrayList<>();
+        for (Unit unit: armyOneOriginal.getAllUnits()){
+            armyOneUnits.add(unit);
+        }
+
+        armyOneCopy = new Army(armyOneOriginal.getName(),armyOneUnits);
+
+        ArrayList<Unit> armyTwoUnits = new ArrayList<>();
+        for(Unit unit: armyTwoOriginal.getAllUnits()){
+            armyTwoUnits.add(unit);
+        }
+        armyTwoCopy = new Army(armyTwoOriginal.getName(),armyTwoUnits);
+
+        copyBattle = new Battle(armyOneCopy,armyTwoCopy,terrainType);
+
+
+        for(Unit unitOne : armyOneCopy.getAllUnits()){
             unitOne.setChangeInHealthListener(this);
         }
 
-        for(Unit unitTwo : armyTwo.getAllUnits()){
+        for(Unit unitTwo : armyTwoCopy.getAllUnits()){
             unitTwo.setChangeInHealthListener(this);
         }
 
-        armyOneName.setText(armyOne.getName());
-        armyTwoName.setText(armyTwo.getName());
+        armyOneName.setText(armyOneCopy.getName());
+        armyTwoName.setText(armyTwoCopy.getName());
 
-        unitsArmyOne.setText(String.valueOf(armyOne.getAllUnits().size()));
-        unitsArmyTwo.setText(String.valueOf(armyTwo.getAllUnits().size()));
+        unitsArmyOne.setText(String.valueOf(armyOneCopy.getAllUnits().size()));
+        unitsArmyTwo.setText(String.valueOf(armyTwoCopy.getAllUnits().size()));
+
+        System.out.println("original " + armyOneOriginal);
+        System.out.println("copy " + armyOneCopy);
+
+        startSimulation.setOnAction(event -> {
+            startSimulation();
+        });
+
     }
 
-    public ArrayList<Unit> armyOneCopy(){
-        return new ArrayList<>(armyOne.getAllUnits());
-    }
-
-    public ArrayList<Unit> armyTwoCopy(){
-        return new ArrayList<>(armyTwo.getAllUnits());
-    }
-
-    //TODO: lag en rad ved siden av "vinduet" hvor har info om uniten, helse, attack osv.., bruk progressen for å vise hvor få units har igjen
     @Override
     public void changeInHealth(Unit unit, int startHealth, int currentHealth) {
         try {
@@ -56,7 +78,7 @@ public class SimulateBattleController extends ChildController implements ChangeI
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        if(armyOne.containsUnit(unit)){
+        if(armyOneCopy.containsUnit(unit)){
                 unitOne.setText(unit.getName());
                 healthOne.setText(String.valueOf(unit.getHealth()));
                 oneAttackBonus.setText(String.valueOf(unit.getAttackBonus()));
@@ -67,7 +89,7 @@ public class SimulateBattleController extends ChildController implements ChangeI
                 oneAttackBonus.setFill(Color.DARKRED);
                 oneResistBonus.setFill(Color.DARKRED);
         }
-        if(armyTwo.containsUnit(unit)) {
+        if(armyTwoCopy.containsUnit(unit)) {
             unitTwo.setText(unit.getName());
             healthTwo.setText(String.valueOf(unit.getHealth()));
             twoAttackBonus.setText(String.valueOf(unit.getAttackBonus()));
@@ -81,11 +103,11 @@ public class SimulateBattleController extends ChildController implements ChangeI
 
     }
 
-    public void startSimulation(ActionEvent event) {
+    public void startSimulation() {
         Thread battleThread = new Thread(() -> {
             Army winnerArmy = null;
             try {
-                winnerArmy = battle.simulate();
+                winnerArmy = copyBattle.simulate();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -94,6 +116,9 @@ public class SimulateBattleController extends ChildController implements ChangeI
             Platform.runLater(() -> {
                 if(finalWinnerArmy != null){
                     winnerArmyText.setText("Winner: " + finalWinnerArmy.getName());
+                    startSimulation.setDisable(false);
+                    startSimulation.setText("Restart");
+                    reStart();
                 }
 
             });
@@ -103,8 +128,9 @@ public class SimulateBattleController extends ChildController implements ChangeI
         Thread messageThread = new Thread(() -> {
             while(battleThread.isAlive()){
 
+                startSimulation.setDisable(true);
                 Platform.runLater(() ->{
-                    if(!armyOne.hasUnit()){
+                    if(!armyOneCopy.hasUnit()){
                         unitOne.setText("All dead");
                         unitOne.setFill(Color.RED);
                         healthOne.setText(String.valueOf(0));
@@ -112,7 +138,7 @@ public class SimulateBattleController extends ChildController implements ChangeI
                         oneResistBonus.setText("");
                         oneAttackBonus.setText("");
                     }
-                    if(!armyTwo.hasUnit()){
+                    if(!armyTwoCopy.hasUnit()){
                         unitTwo.setText("All dead");
                         unitTwo.setFill(Color.RED);
                         healthTwo.setText(String.valueOf(0));
@@ -127,13 +153,13 @@ public class SimulateBattleController extends ChildController implements ChangeI
                     oneAttackBonus.setFill(Color.BLACK);
                     oneResistBonus.setFill(Color.BLACK);
 
-                    unitsArmyOne.setText(String.valueOf(armyOne.getAllUnits().size()));
-                    unitsArmyTwo.setText(String.valueOf(armyTwo.getAllUnits().size()));
+                    unitsArmyOne.setText(String.valueOf(armyOneCopy.getAllUnits().size()));
+                    unitsArmyTwo.setText(String.valueOf(armyTwoCopy.getAllUnits().size()));
 
                 });
 
                 try {
-                    Thread.sleep(battle.getSleepTime());
+                    Thread.sleep(copyBattle.getSleepTime());
                 } catch (InterruptedException ie) {
                     ie.printStackTrace();
                 }
@@ -142,7 +168,14 @@ public class SimulateBattleController extends ChildController implements ChangeI
 
         battleThread.start();
         messageThread.start();
+    }
 
+    public void reStart(){
+        System.out.println("original " + armyOneOriginal);
+        System.out.println("copy " + armyOneCopy);
+        startSimulation.setOnAction(event -> {
+            parent.show("simulateBattle.fxml");
+        });
     }
 
     public void goBack(ActionEvent event) {

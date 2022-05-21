@@ -14,10 +14,10 @@ public class HomeController extends ChildController {
     }
 
     public void importArmies(ActionEvent event) {
-        parent.show("importArmies.fxml");
+        parent.show("ImportArmies.fxml");
     }
 
     public void defaultArmies(ActionEvent event) {
-        parent.show("defaultArmies.fxml");
+        parent.show("defaultArmyOne.fxml");
     }
 }

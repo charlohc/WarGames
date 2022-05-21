@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 //TODO: make more test
 class ReadFileTest {
@@ -24,7 +25,7 @@ class ReadFileTest {
     public void reset() throws IOException {
         readFile = new ReadFile();
         army = new Army("Humans",new ArrayList<>());
-        writeFile = new WriteFile(army);
+        writeFile = new WriteFile();
 
     }
 
@@ -32,7 +33,7 @@ class ReadFileTest {
     //TODO: find another way to read from file, se teacher git lab
     @Test
     public void TestOutFileCorrectUsage() throws Exception {
-        readFile.ReadFileGivenFile(new File("out.csv"));
+        readFile.ReadFileGivenFile(new File(army.getName()));
     }
 
 
@@ -54,7 +55,8 @@ class ReadFileTest {
 
     @Test
     public void TestReadEmptyFile() throws Exception{
-        readFile.ReadFileGivenFile(new File("emptyFile.csv"));
+        //assertThrows(Exception.class,() -> readFile.ReadFileGivenFile(new File("emptyFile.csv")));
+
     }
 
 }

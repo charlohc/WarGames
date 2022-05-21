@@ -1,6 +1,7 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
+import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.WriteFile;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
@@ -25,7 +26,7 @@ import java.util.List;
 public class CreateArmyTwoController extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmyTwo;
-
+    WriteFile writeFile;
     UnitFactory unitFactory;
     UnitTypeENUM unitType;
     Unit newUnit, testUnit;
@@ -83,6 +84,7 @@ public class CreateArmyTwoController extends ChildController{
         valueFactory1.setValue(1);
 
         unitFactory = new UnitFactory();
+        writeFile = new WriteFile();
     }
 
     public void newArmy(ActionEvent event) {
@@ -90,6 +92,7 @@ public class CreateArmyTwoController extends ChildController{
             blankName();
         }else {
             currentArmyTwo = new Army(armyName.getText());
+
             info.setText(armyName.getText() + " is ready for battle!");
             addUnit.setDisable(false);
             addFiveUnits.setDisable(false);
@@ -105,7 +108,9 @@ public class CreateArmyTwoController extends ChildController{
         }else {
             newUnit = unitFactory.createUnitByType(unitType, unitName.getText(), health.getValue());
             units.add(newUnit);
+
             currentArmyTwo.addUnit(newUnit);
+
             unitName.clear();
 
             numbersOfUnits++;
@@ -119,6 +124,7 @@ public class CreateArmyTwoController extends ChildController{
         }else {
             newUnits = unitFactory.createListOfUnits(5, unitType, unitName.getText(), health.getValue());
             units.addAll(newUnit);
+
             currentArmyTwo.addAllUnits(newUnits);
 
             unitName.clear();
@@ -160,6 +166,7 @@ public class CreateArmyTwoController extends ChildController{
 
     public void viewArmy(ActionEvent event){
         parent.armies.add(currentArmyTwo);
+        writeFile.printTxt(currentArmyTwo);
         parent.show("ViewArmyTwo.fxml");
 
     }
