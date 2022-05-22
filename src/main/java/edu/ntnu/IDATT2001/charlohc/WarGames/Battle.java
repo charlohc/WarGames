@@ -12,7 +12,9 @@ public class Battle {
     private final TerrainTypesENUM terrainTypes;
     private Unit unit1, unit2;
     private Unit attacker, defender;
-    private int sleepTime = 1500;
+
+    //2050(?)
+    private int sleepTime = 100;
 
     /**
      *
@@ -107,14 +109,6 @@ public class Battle {
         return sleepTime;
     }
 
-    public Unit getUnit1(){
-        return unit1;
-    }
-
-    public Unit getUnit2(){
-        return unit2;
-    }
-
     public Unit getAttacker(){
         return attacker;
     }
@@ -122,8 +116,6 @@ public class Battle {
     public Unit getDefender(){
         return defender;
     }
-
-
 
 
     /**
