@@ -53,6 +53,7 @@ class BattleTest {
         }
     }
 
+
     @Test
     void getTerrainFromUnit(){
         Assertions.assertEquals(TerrainTypesENUM.PLAINS, humans.getInfantryUnits().get(0).getTerrainType());

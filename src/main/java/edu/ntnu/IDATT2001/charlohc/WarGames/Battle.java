@@ -11,7 +11,8 @@ public class Battle {
     private final Army armyOne, armyTwo;
     private final TerrainTypesENUM terrainTypes;
     private Unit unit1, unit2;
-    private int sleepTime = 3000;
+    private Unit attacker, defender;
+    private int sleepTime = 1500;
 
     /**
      *
@@ -22,6 +23,8 @@ public class Battle {
         this.armyOne = armyOne;
         this.armyTwo = armyTwo;
         this.terrainTypes = terrainTypes;
+        this.attacker = null;
+        this.defender = null;
 
         armyOne.getAllUnits().forEach(unit -> unit.setTerrainTypes(terrainTypes));
         armyTwo.getAllUnits().forEach(unit -> unit.setTerrainTypes(terrainTypes));
@@ -54,16 +57,23 @@ public class Battle {
             unit1 = armyOne.getRandomUnit();
             unit2 = armyTwo.getRandomUnit();
 
+
             while (unit1.getHealth() != 0 && unit2.getHealth() != 0) {
                 if (armyOne.getRandomNumber() == 1) {
                     unitOneAttack();
-
+                    attacker = unit1;
+                    defender = unit2;
                 } else {
                     unitTwoAttack();
+                    attacker = unit2;
+                    defender = unit1;
                 }
+                Thread.sleep(sleepTime);
             }
-            Thread.sleep(sleepTime);
+
         }
+        attacker = null;
+        defender = null;
 
         if(!armyOne.hasUnit()){
             return armyTwo;
@@ -74,7 +84,6 @@ public class Battle {
 
     public void unitOneAttack(){
         unit1.attack(unit2);
-        System.out.println(unit1 + " attack " + unit2);
 
         if (unit2.getHealth() == 0) {
             armyTwo.removeUnit(unit2);
@@ -84,8 +93,6 @@ public class Battle {
 
     public void unitTwoAttack(){
         unit2.attack(unit1);
-
-        System.out.println(unit2 + " attack " + unit1);
 
         if (unit1.getHealth() == 0) {
             armyOne.removeUnit(unit1);
@@ -99,6 +106,24 @@ public class Battle {
     public int getSleepTime() {
         return sleepTime;
     }
+
+    public Unit getUnit1(){
+        return unit1;
+    }
+
+    public Unit getUnit2(){
+        return unit2;
+    }
+
+    public Unit getAttacker(){
+        return attacker;
+    }
+
+    public Unit getDefender(){
+        return defender;
+    }
+
+
 
 
     /**

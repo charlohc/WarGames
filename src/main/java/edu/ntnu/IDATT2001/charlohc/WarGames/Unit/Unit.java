@@ -11,10 +11,10 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
  */
 public abstract class Unit{
     private ChangeInHealth listener;
-    private final String name;
+    private String name;
     private int health;
-    private final int attack;
-    private final int armor;
+    private int attack;
+    private int armor;
     private TerrainTypesENUM terrainTypesENUM;
 
 //TODO: can attack and armor be zero?
@@ -37,6 +37,7 @@ public abstract class Unit{
         this.armor = armor;
         terrainTypesENUM = null;
     }
+
 
     /**
      * Gets the unit name
@@ -74,6 +75,20 @@ public abstract class Unit{
         return terrainTypesENUM;
     }
 
+    public String setName(String name){
+        this.name = name;
+        return name;
+    }
+
+    public int setAttack(int attack){
+        this.attack = attack;
+        return attack;
+    }
+
+    public int setArmour(int armour){
+        this.armor = armour;
+        return armour;
+    }
     public void setTerrainTypes(TerrainTypesENUM terrainTypesENUM){
        if(terrainTypesENUM ==  null){throw new IllegalArgumentException("Terrain type can not be null");}
        this.terrainTypesENUM = terrainTypesENUM;
@@ -131,6 +146,7 @@ public abstract class Unit{
         opponent.setHealth(healthOpponent);
 
     }
+
 
 
     /**

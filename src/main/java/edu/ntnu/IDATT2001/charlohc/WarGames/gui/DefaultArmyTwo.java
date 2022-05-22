@@ -35,11 +35,12 @@ public class DefaultArmyTwo extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
 
+
     ObservableList<Unit> observableList = FXCollections.observableArrayList(
-            unitFactory.createUnitByType(UnitTypeENUM.CAVALRY,"Raider",60),
-            unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Gul dan",90),
-            unitFactory.createUnitByType(UnitTypeENUM.RANGED,"SpearMan",80),
-            unitFactory.createUnitByType(UnitTypeENUM.INFANTRY, "Grunt",80)
+            unitFactory.createUnitByType(UnitTypeENUM.CAVALRY,"Raider",70),
+            unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Gul dan",80),
+            unitFactory.createUnitByType(UnitTypeENUM.RANGED,"SpearMan",70),
+            unitFactory.createUnitByType(UnitTypeENUM.INFANTRY, "Grunt",60)
     );
 
     @Override

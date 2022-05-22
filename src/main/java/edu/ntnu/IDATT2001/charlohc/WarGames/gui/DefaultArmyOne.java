@@ -15,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class DefaultArmyOne extends ChildController{
-
     UnitFactory unitFactory = new UnitFactory();
 
     @FXML
@@ -36,17 +35,17 @@ public class DefaultArmyOne extends ChildController{
     private Army currentArmy;
 
     ObservableList<Unit> observableList = FXCollections.observableArrayList(
-            unitFactory.createUnitByType(UnitTypeENUM.CAVALRY,"Knight",60),
-            unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Mountain King",90),
-            unitFactory.createUnitByType(UnitTypeENUM.RANGED,"Archer",80),
-            unitFactory.createUnitByType(UnitTypeENUM.INFANTRY, "FootMan",80)
+            unitFactory.createUnitByType(UnitTypeENUM.CAVALRY,"Knight",70),
+            unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Mountain King",80),
+            unitFactory.createUnitByType(UnitTypeENUM.RANGED,"Archer",70),
+            unitFactory.createUnitByType(UnitTypeENUM.INFANTRY, "FootMan",60)
     );
 
     @Override
     public void load() {
         currentArmy = new Army("Humans", observableList);
         parent.currentArmyOne = currentArmy;
-        
+
         armyName.setText(currentArmy.getName());
 
         numbersOfUnitText();

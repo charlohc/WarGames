@@ -5,6 +5,7 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.Battle;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Listener.ChangeInHealth;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
+import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -17,10 +18,11 @@ import java.util.ArrayList;
 
 //TODO: must make own armyCopy constructor
 public class SimulateBattleController extends ChildController implements ChangeInHealth {
-    ObservableList<Army> armies;
     Army armyOneOriginal, armyTwoOriginal,armyOneCopy, armyTwoCopy;
     Battle copyBattle;
     TerrainTypesENUM terrainType;
+    UnitFactory unitFactory = new UnitFactory();
+    int damageOne, damageTwo;
 
     @FXML public Text unitOne,unitTwo, armyOneName, armyTwoName, healthOne, healthTwo,winnerArmyText,unitsArmyOne,unitsArmyTwo;
     public Text oneAttackBonus, twoAttackBonus, oneResistBonus, twoResistBonus;
@@ -34,20 +36,23 @@ public class SimulateBattleController extends ChildController implements ChangeI
 
         ArrayList<Unit> armyOneUnits = new ArrayList<>();
         for (Unit unit: armyOneOriginal.getAllUnits()){
-            armyOneUnits.add(unit);
+            Unit unitCopy = unitFactory.createUnitByType(unit.getUnitType(),unit.getName(),unit.getHealth());
+            armyOneUnits.add(unitCopy);
         }
 
         armyOneCopy = new Army(armyOneOriginal.getName(),armyOneUnits);
 
+
         ArrayList<Unit> armyTwoUnits = new ArrayList<>();
-        for(Unit unit: armyTwoOriginal.getAllUnits()){
-            armyTwoUnits.add(unit);
+        for (Unit unit: armyTwoOriginal.getAllUnits()){
+            Unit unitCopy = unitFactory.createUnitByType(unit.getUnitType(),unit.getName(),unit.getHealth());
+            armyTwoUnits.add(unitCopy);
         }
         armyTwoCopy = new Army(armyTwoOriginal.getName(),armyTwoUnits);
 
         copyBattle = new Battle(armyOneCopy,armyTwoCopy,terrainType);
 
-
+/*
         for(Unit unitOne : armyOneCopy.getAllUnits()){
             unitOne.setChangeInHealthListener(this);
         }
@@ -56,14 +61,13 @@ public class SimulateBattleController extends ChildController implements ChangeI
             unitTwo.setChangeInHealthListener(this);
         }
 
+
+ */
         armyOneName.setText(armyOneCopy.getName());
         armyTwoName.setText(armyTwoCopy.getName());
 
         unitsArmyOne.setText(String.valueOf(armyOneCopy.getAllUnits().size()));
         unitsArmyTwo.setText(String.valueOf(armyTwoCopy.getAllUnits().size()));
-
-        System.out.println("original " + armyOneOriginal);
-        System.out.println("copy " + armyOneCopy);
 
         startSimulation.setOnAction(event -> {
             startSimulation();
@@ -73,33 +77,7 @@ public class SimulateBattleController extends ChildController implements ChangeI
 
     @Override
     public void changeInHealth(Unit unit, int startHealth, int currentHealth) {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        if(armyOneCopy.containsUnit(unit)){
-                unitOne.setText(unit.getName());
-                healthOne.setText(String.valueOf(unit.getHealth()));
-                oneAttackBonus.setText(String.valueOf(unit.getAttackBonus()));
-                oneResistBonus.setText(String.valueOf(unit.getResistBonus()));
 
-                unitOne.setUnderline(true);
-                healthOne.setFill(Color.DARKRED);
-                oneAttackBonus.setFill(Color.DARKRED);
-                oneResistBonus.setFill(Color.DARKRED);
-        }
-        if(armyTwoCopy.containsUnit(unit)) {
-            unitTwo.setText(unit.getName());
-            healthTwo.setText(String.valueOf(unit.getHealth()));
-            twoAttackBonus.setText(String.valueOf(unit.getAttackBonus()));
-            twoResistBonus.setText(String.valueOf(unit.getResistBonus()));
-
-            unitTwo.setUnderline(true);
-            healthTwo.setFill(Color.DARKRED);
-            twoAttackBonus.setFill(Color.DARKRED);
-            twoAttackBonus.setFill(Color.DARKRED);
-        }
 
     }
 
@@ -117,7 +95,7 @@ public class SimulateBattleController extends ChildController implements ChangeI
                 if(finalWinnerArmy != null){
                     winnerArmyText.setText("Winner: " + finalWinnerArmy.getName());
                     startSimulation.setDisable(false);
-                    startSimulation.setText("Restart");
+                    startSimulation.setText("Back to start");
                     reStart();
                 }
 
@@ -126,10 +104,13 @@ public class SimulateBattleController extends ChildController implements ChangeI
 
 
         Thread messageThread = new Thread(() -> {
-            while(battleThread.isAlive()){
+            while(battleThread.isAlive() && copyBattle.getDefender() != null){
 
-                startSimulation.setDisable(true);
+                battleInfo();
+
                 Platform.runLater(() ->{
+
+
                     if(!armyOneCopy.hasUnit()){
                         unitOne.setText("All dead");
                         unitOne.setFill(Color.RED);
@@ -170,9 +151,42 @@ public class SimulateBattleController extends ChildController implements ChangeI
         messageThread.start();
     }
 
+    public void battleInfo(){
+        startSimulation.setDisable(true);
+
+        if(armyOneCopy.containsUnit(copyBattle.getAttacker())){
+            unitOne.setText(copyBattle.getAttacker().getName());
+            healthOne.setText(String.valueOf(copyBattle.getAttacker().getHealth()));
+            oneAttackBonus.setText(String.valueOf(copyBattle.getAttacker().getAttackBonus() + copyBattle.getAttacker().getAttackValue()));
+            oneResistBonus.setText(String.valueOf(copyBattle.getAttacker().getResistBonus() + copyBattle.getAttacker().getArmor()));
+
+        }else{
+            unitOne.setText(copyBattle.getDefender().getName());
+            healthOne.setText(String.valueOf(copyBattle.getDefender().getHealth()));
+            oneAttackBonus.setText(String.valueOf(copyBattle.getDefender().getAttackBonus() + copyBattle.getDefender().getAttackValue()));
+            oneResistBonus.setText(String.valueOf(copyBattle.getDefender().getResistBonus() + copyBattle.getDefender().getArmor()));
+
+        }
+
+        if(armyTwoCopy.containsUnit(copyBattle.getAttacker())){
+            unitTwo.setText(copyBattle.getAttacker().getName());
+            healthTwo.setText(String.valueOf(copyBattle.getAttacker().getHealth()));
+            twoAttackBonus.setText(String.valueOf(copyBattle.getAttacker().getAttackBonus() + copyBattle.getAttacker().getAttackValue()));
+            twoResistBonus.setText(String.valueOf(copyBattle.getAttacker().getResistBonus() + copyBattle.getAttacker().getArmor()));
+
+        }else{
+            unitTwo.setText(copyBattle.getDefender().getName());
+            healthTwo.setText(String.valueOf(copyBattle.getDefender().getHealth()));
+            twoAttackBonus.setText(String.valueOf(copyBattle.getDefender().getAttackBonus() + copyBattle.getDefender().getAttackValue()));
+            twoResistBonus.setText(String.valueOf(copyBattle.getDefender().getResistBonus() + copyBattle.getDefender().getArmor()));
+
+        }
+
+
+    }
+
     public void reStart(){
-        System.out.println("original " + armyOneOriginal);
-        System.out.println("copy " + armyOneCopy);
+        System.out.println(armyOneOriginal);
         startSimulation.setOnAction(event -> {
             parent.show("simulateBattle.fxml");
         });
@@ -181,4 +195,15 @@ public class SimulateBattleController extends ChildController implements ChangeI
     public void goBack(ActionEvent event) {
         parent.show("battle.fxml");
     }
+
+    /*
+    if(copyBattle.getUnit1().equals(copyBattle.getAttacker())) {
+            System.out.println("Army one now has attack " + copyBattle.getAttacker());
+            unitOne.setText(copyBattle.getAttacker().getName());
+            healthOne.setText(String.valueOf(copyBattle.getAttacker().getHealth()));
+            oneAttackBonus.setText(String.valueOf(copyBattle.getAttacker().getAttackBonus() + copyBattle.getAttacker().getAttackValue()));
+            oneResistBonus.setText(String.valueOf(copyBattle.getAttacker().getResistBonus() + copyBattle.getAttacker().getArmor()));
+        }
+     */
+
 }
