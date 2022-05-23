@@ -22,7 +22,7 @@ class ReadFileTest {
     Army army;
 
     @BeforeEach
-    public void reset() throws IOException {
+         public void reset() throws IOException {
         readFile = new ReadFile();
         army = new Army("Humans",new ArrayList<>());
         writeFile = new WriteFile();
@@ -32,7 +32,7 @@ class ReadFileTest {
     //TODO: How do i test that is returns correctly
     //TODO: find another way to read from file, se teacher git lab
     @Test
-    public void TestOutFileCorrectUsage() throws Exception {
+     void TestOutFileCorrectUsage() throws Exception {
         readFile.ReadFileGivenFile(new File(army.getName()));
     }
 
@@ -40,7 +40,7 @@ class ReadFileTest {
     //Wants to make sure that the system keeps running even though it happens something that shouldn't happen, the user will get a message
     //TODO: corrected tested?
     @Test
-    public void TestEmptyNameFile() throws Exception {
+     void TestEmptyNameFile() throws Exception {
         readFile.ReadFileGivenFile(new File(""));
         boolean thrown = false;
 
@@ -54,7 +54,7 @@ class ReadFileTest {
     }
 
     @Test
-    public void TestReadEmptyFile() throws Exception{
+     void TestReadEmptyFile() throws Exception{
         //assertThrows(Exception.class,() -> readFile.ReadFileGivenFile(new File("emptyFile.csv")));
 
     }

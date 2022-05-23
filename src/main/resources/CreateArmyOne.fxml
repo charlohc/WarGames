@@ -41,14 +41,14 @@
          <children>
             <ImageView fx:id="infantryImgView" fitHeight="100.0" fitWidth="100.0" layoutX="14.0" layoutY="4.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../infantry.png" />
+                  <Image url="@../../../img/infantry.png" />
                </image></ImageView>
          </children></Pane>
       <Pane fx:id="ranged" layoutX="525.0" layoutY="400.0" onMouseClicked="#selectedUnitType" prefHeight="127.0" prefWidth="129.0" style="-fx-border-color: black;">
          <children>
             <ImageView fx:id="rangedImgView" fitHeight="100.0" fitWidth="130.0" layoutX="15.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../ranged.png" />
+                  <Image url="@../../../img/ranged.png" />
                </image>
             </ImageView>
          </children></Pane>
@@ -56,7 +56,7 @@
          <children>
             <ImageView fx:id="commanderImgView" disable="true" fitHeight="100.0" fitWidth="100.0" layoutX="11.0" layoutY="13.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../commander.png" />
+                  <Image url="@../../../img/commander.png" />
                </image>
             </ImageView>
          </children></Pane>
@@ -64,7 +64,7 @@
          <children>
             <ImageView fx:id="calvaryImgView" disable="true" fitHeight="100.0" fitWidth="130.0" layoutX="15.0" layoutY="5.0" preserveRatio="true">
                <image>
-                  <Image url="@../../../cavalry.png" />
+                  <Image url="@../../../img/cavalry.png" />
                </image>
             </ImageView>
          </children></Pane>

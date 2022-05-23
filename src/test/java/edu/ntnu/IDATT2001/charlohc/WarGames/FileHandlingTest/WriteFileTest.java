@@ -19,7 +19,7 @@ class WriteFileTest {
     UnitFactory unitFactory;
 
     @BeforeEach
-    public void reset() {
+     void reset() {
         unitFactory = new UnitFactory();
         try {
             humans = new Army("Orcs army", new ArrayList<>());
@@ -43,7 +43,7 @@ class WriteFileTest {
 
 
     @Test
-    public void TestWriteFileExist() {
+    void TestWriteFileExist() {
         File f = new File(humans.getName() + ".csv");
         Assertions.assertTrue(f.isFile() && !f.isDirectory());
     }

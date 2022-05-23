@@ -80,9 +80,10 @@ public class Army {
      */
     public List<Unit> getCommanderUnits(){
         return this.units.stream()
-                .filter(unit -> unit instanceof CommanderUnit)
-                .toList();
+               .filter(unit -> unit instanceof CommanderUnit)
+               .toList();
     }
+
 
     /**
      * Methode that adds a unit to the list of units

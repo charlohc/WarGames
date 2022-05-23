@@ -11,7 +11,7 @@ class CommanderUnitTest {
     CommanderUnit commanderUnit1, commanderUnit2, commanderUnit3;
 
     @BeforeEach
-    public void reset() {
+    void reset() {
         try {
             commanderUnit1 = new CommanderUnit("Commander Unit One", 100, 20, 12);
             commanderUnit2 = new CommanderUnit("Commander Unit Two", 100, 20, 12);
@@ -29,17 +29,17 @@ class CommanderUnitTest {
     @DisplayName("Tests of get resist bonus methode")
     class getResistBonus {
         @Test
-        public void GetResistBonusTerrainForrest() {
+        void GetResistBonusTerrainForrest() {
             assertEquals(0, commanderUnit1.getResistBonus());
         }
 
         @Test
-        public void GetResistBonusTerrainHill() {
+        void GetResistBonusTerrainHill() {
             assertEquals(1, commanderUnit2.getResistBonus());
         }
 
         @Test
-        public void getResistBonusTerrainPlains() {
+        void getResistBonusTerrainPlains() {
             assertEquals(1, commanderUnit3.getResistBonus());
         }
     }
@@ -50,34 +50,34 @@ class CommanderUnitTest {
     class getAttackBonus {
 
         @Test
-        public void getBonusFirstAttackTerrainForrest() {
+        void getBonusFirstAttackTerrainForrest() {
             Assertions.assertEquals(6, commanderUnit1.getAttackBonus());
         }
 
         @Test
-        public void getBonusSecondAttackTerrainForrest() {
+        void getBonusSecondAttackTerrainForrest() {
             commanderUnit1.getAttackBonus();
             Assertions.assertEquals(2, commanderUnit1.getAttackBonus());
         }
 
         @Test
-        public void getBonusFirstAttackTerrainHill() {
+        void getBonusFirstAttackTerrainHill() {
             Assertions.assertEquals(6, commanderUnit2.getAttackBonus());
         }
 
         @Test
-        public void getBonusSecondAttackTerrainHill() {
+        void getBonusSecondAttackTerrainHill() {
             commanderUnit2.getAttackBonus();
             Assertions.assertEquals(2, commanderUnit2.getAttackBonus());
         }
 
         @Test
-        public void getBonusFirstAttackTerrainPlains() {
+        void getBonusFirstAttackTerrainPlains() {
             Assertions.assertEquals(8, commanderUnit3.getAttackBonus());
         }
 
         @Test
-        public void getBonusSecondAttackTerrainPlains() {
+        void getBonusSecondAttackTerrainPlains() {
             commanderUnit3.getAttackBonus();
             Assertions.assertEquals(4, commanderUnit3.getAttackBonus());
         }
@@ -90,14 +90,14 @@ class CommanderUnitTest {
         //Health - ((opponent)attack + (opponent)attack bonus) + (armour + resist bonus)
         //100 - (20 + 6) + (12 + 0) = 86
         @Test
-        public void HealthAfterFirstAttackTerrainForrest() {
+        void HealthAfterFirstAttackTerrainForrest() {
             commanderUnit1.attack(commanderUnit1);
             assertEquals(86, commanderUnit1.getHealth());
         }
 
         //86 - (20 + 2) + (12 + 0) = 76
         @Test
-        public void HealthAfterSecondAttackTerrainForrest() {
+        void HealthAfterSecondAttackTerrainForrest() {
             commanderUnit1.attack(commanderUnit1);
             commanderUnit1.attack(commanderUnit1);
             assertEquals(76, commanderUnit1.getHealth());
@@ -110,14 +110,14 @@ class CommanderUnitTest {
 
         //100 - (20 + 6) + (12 + 1) = 87
         @Test
-        public void HealthAfterFirstAttackTerrainHill() {
+        void HealthAfterFirstAttackTerrainHill() {
             commanderUnit2.attack(commanderUnit2);
             Assertions.assertEquals(87, commanderUnit2.getHealth());
         }
 
         //87 - (20 + 2) + (12 + 1) = 74
         @Test
-        public void HealthAfterSecondAttackTerrainHill() {
+        void HealthAfterSecondAttackTerrainHill() {
             commanderUnit2.attack(commanderUnit2);
             commanderUnit2.attack(commanderUnit2);
             Assertions.assertEquals(78, commanderUnit2.getHealth());
@@ -130,14 +130,14 @@ class CommanderUnitTest {
 
         //100 - (20 + 8) + (12 + 1) = 85
         @Test
-        public void HealthAfterFirstAttackTerrainPlains() {
+        void HealthAfterFirstAttackTerrainPlains() {
             commanderUnit3.attack(commanderUnit3);
             Assertions.assertEquals(85, commanderUnit3.getHealth());
         }
 
         //85 - (20 + 4) + (12 + 1) = 74
         @Test
-        public void HealthAfterSecondAttackTerrainPlains() {
+        void HealthAfterSecondAttackTerrainPlains() {
             commanderUnit3.attack(commanderUnit3);
             commanderUnit3.attack(commanderUnit3);
             Assertions.assertEquals(74, commanderUnit3.getHealth());
@@ -145,7 +145,7 @@ class CommanderUnitTest {
     }
 
     @Test
-    public void differentTerrainsAttack() {
+    void differentTerrainsAttack() {
         assertThrows(IllegalArgumentException.class, () -> commanderUnit1.attack(commanderUnit2));
     }
 }

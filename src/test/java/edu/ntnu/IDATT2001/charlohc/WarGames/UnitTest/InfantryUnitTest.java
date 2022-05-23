@@ -29,12 +29,12 @@ InfantryUnit infantryUnit1, infantryUnit2,infantryUnit3;
     @DisplayName("Tests of get resist bonus methode")
     class getResistBonus{
         @Test
-        public void GetResistBonusTerrainForrest(){
+        void GetResistBonusTerrainForrest(){
             assertEquals(3,infantryUnit1.getResistBonus());
         }
 
         @Test
-        public void GetResistBonusTerrainHill(){
+        void GetResistBonusTerrainHill(){
             infantryUnit2.getResistBonus();
             assertEquals(1,infantryUnit2.getResistBonus());
         }
@@ -45,12 +45,12 @@ InfantryUnit infantryUnit1, infantryUnit2,infantryUnit3;
     class getAttackBonus {
 
         @Test
-        public void getAttackBonusTerrainForrest() {
+        void getAttackBonusTerrainForrest() {
             Assertions.assertEquals(2, infantryUnit2.getAttackBonus());
         }
 
         @Test
-        public void getAttackBonusTerrainHill() {
+        void getAttackBonusTerrainHill() {
             Assertions.assertEquals(6, infantryUnit1.getAttackBonus());
         }
 
@@ -60,7 +60,7 @@ InfantryUnit infantryUnit1, infantryUnit2,infantryUnit3;
     class attackTerrainForrest {
         @Test
         @DisplayName("Health after first attack infantry unit with terrain type forrest")
-        public void HealthAfterFirstAttackTerrainTypeForrest() {
+        void HealthAfterFirstAttackTerrainTypeForrest() {
             infantryUnit1.attack(infantryUnit1);
             assertEquals(infantryUnit1.getHealth(), 92);
         }
@@ -68,7 +68,7 @@ InfantryUnit infantryUnit1, infantryUnit2,infantryUnit3;
         //
         @Test
         @DisplayName("Health after second attack infantry unit with terrain type forrest")
-        public void HealthAfterSecondAttackTerrainTypeForrest() {
+        void HealthAfterSecondAttackTerrainTypeForrest() {
             infantryUnit1.attack(infantryUnit1);
             infantryUnit1.attack(infantryUnit1);
             assertEquals(infantryUnit1.getHealth(), 84);
@@ -80,14 +80,14 @@ InfantryUnit infantryUnit1, infantryUnit2,infantryUnit3;
     class attackTerrainHill {
         @Test
         @DisplayName("Health after first attack infantry unit with terrain type hill")
-        public void HealthAfterFirstAttackTerrainTypeHill() {
+        void HealthAfterFirstAttackTerrainTypeHill() {
             infantryUnit3.attack(infantryUnit3);
             assertEquals(infantryUnit3.getHealth(), 94);
         }
 
         @Test
         @DisplayName("Health after second attack infantry unit with terrain type hill")
-        public void HealthAfterSecondAttackTerrainTypeHille() {
+        void HealthAfterSecondAttackTerrainTypeHille() {
             infantryUnit3.attack(infantryUnit3);
             infantryUnit3.attack(infantryUnit3);
             assertEquals(infantryUnit3.getHealth(), 88);
@@ -99,14 +99,14 @@ InfantryUnit infantryUnit1, infantryUnit2,infantryUnit3;
     class attackTerrainPlains {
         @Test
         @DisplayName("Health after first attack infantry unit with terrain type plains")
-        public void HealthAfterFirstAttackTerrainTypePlains() {
+        void HealthAfterFirstAttackTerrainTypePlains() {
             infantryUnit2.attack(infantryUnit2);
             assertEquals(infantryUnit2.getHealth(), 94);
         }
 
         @Test
         @DisplayName("Health after second attack infantry unit with terrain type plains")
-        public void HealthAfterSecondAttackTerrainTypePlains() {
+        void HealthAfterSecondAttackTerrainTypePlains() {
             infantryUnit2.attack(infantryUnit2);
             infantryUnit2.attack(infantryUnit2);
             assertEquals(infantryUnit2.getHealth(), 88);
@@ -114,7 +114,7 @@ InfantryUnit infantryUnit1, infantryUnit2,infantryUnit3;
     }
 
     @Test
-    public void differentTerrainsAttack(){
+    void differentTerrainsAttack(){
         assertThrows(IllegalArgumentException.class,() -> infantryUnit1.attack(infantryUnit3));
     }
 

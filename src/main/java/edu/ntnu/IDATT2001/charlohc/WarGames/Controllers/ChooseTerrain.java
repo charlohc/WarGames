@@ -26,9 +26,9 @@ public class ChooseTerrain extends ChildController{
 
     @FXML public Button simulate, confirm;
 
-    Image forrest = new Image("file:forrest.png");
-    Image plains = new Image("file:plains.png");
-    Image hill = new Image("file:hill.png");
+    Image forrest = new Image("file:img/forrest.png");
+    Image plains = new Image("file:img/plains.png");
+    Image hill = new Image("file:img/hill.png");
 
     @Override
     public void load() {
@@ -43,7 +43,7 @@ public class ChooseTerrain extends ChildController{
 
             infoBattle.setText("You have chosen the terrain type: " + terrainType.toString() + " \n you can now start the simulation...");
             infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
-            infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY, Insets.EMPTY)));
+            getInfoBoxBackgroundColour();
         }
 
         Vs.setText(armyOne.getName() + " VS. " + armyTwo.getName());
@@ -81,6 +81,16 @@ public class ChooseTerrain extends ChildController{
         confirmPossible();
     }
 
+    private void getInfoBoxBackgroundColour() {
+        if(terrainType == TerrainTypesENUM.FOREST){
+            infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY, Insets.EMPTY)));
+        }else if(terrainType == TerrainTypesENUM.PLAINS) {
+            infoPane.setBackground(new Background(new BackgroundFill(Color.web("#D2A76B"), CornerRadii.EMPTY, Insets.EMPTY)));
+        }else{
+            infoPane.setBackground(new Background(new BackgroundFill(Color.web("#FDE992"), CornerRadii.EMPTY, Insets.EMPTY)));
+        }
+    }
+
     public void confirmPossible(){
         confirm.setDisable(false);
     }
@@ -89,8 +99,8 @@ public class ChooseTerrain extends ChildController{
         infoBattle.setText("");
 
         infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
-        infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY, Insets.EMPTY)));
         infoBattle.setText("You have chosen the terrain type: " + terrainType.toString() + " \n you can now start the simulation...");
+        getInfoBoxBackgroundColour();
 
         battle = new Battle(armyOne,armyTwo,terrainType);
         parent.battle = battle;

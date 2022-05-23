@@ -13,8 +13,7 @@ public class Battle {
     private Unit unit1, unit2;
     private Unit attacker, defender;
 
-    //2050(?)
-    private int sleepTime = 1150;
+    private final int sleepTime = 1350;
 
     /**
      *
@@ -99,10 +98,6 @@ public class Battle {
         if (unit1.getHealth() == 0) {
             armyOne.removeUnit(unit1);
         }
-    }
-
-    public void setSleepTime(int sleepTime) {
-        this.sleepTime = sleepTime;
     }
 
     public int getSleepTime() {

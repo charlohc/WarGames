@@ -37,7 +37,7 @@ public class ViewCustomArmyTwo extends ChildController {
         currentArmy = parent.currentArmyTwo;
         this.units.addAll(currentArmy.getAllUnits());
 
-        armyName.setText(currentArmy.getName() + " army");
+        armyName.setText(currentArmy.getName());
 
         tableView.setItems(units);
         typeColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("unitType"));

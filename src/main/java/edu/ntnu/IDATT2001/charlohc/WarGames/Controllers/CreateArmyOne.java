@@ -50,21 +50,19 @@ public class CreateArmyOne extends ChildController{
 
     @FXML public Spinner<Integer> health;
 
-    Image calvaryImg = new Image("file:cavalry.png");
-    Image commanderImg = new Image("file:commander.png");
-    Image infantryImg = new Image("file:infantry.png");
-    Image rangedImg = new Image("file:ranged.png");
+    Image calvaryImg = new Image("file:img/cavalry.png");
+    Image commanderImg = new Image("file:img/commander.png");
+    Image infantryImg = new Image("file:img/infantry.png");
+    Image rangedImg = new Image("file:img/ranged.png");
 
 
     @Override
     public void load() {
     currentArmy = parent.currentArmyOne;
     if(parent.currentArmyOne != null){
-        nameArmy.setDisable(true);
         nameArmy.setText(currentArmy.getName());
 
         viewArmy.setDisable(false);
-        confirm.setDisable(true);
         addUnit.setDisable(false);
         addFiveUnits.setDisable(false);
 
@@ -99,9 +97,9 @@ public class CreateArmyOne extends ChildController{
                 addUnit.setDisable(false);
                 addFiveUnits.setDisable(false);
                 viewArmy.setDisable(false);
-                confirm.setDisable(true);
 
                 parent.currentArmyOne = currentArmy;
+                numbersOfUnits = 0;
             }
         }
     }

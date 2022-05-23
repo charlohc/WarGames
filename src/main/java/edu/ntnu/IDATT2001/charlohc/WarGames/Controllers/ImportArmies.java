@@ -5,6 +5,7 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.ReadFile;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
@@ -40,7 +41,7 @@ public class ImportArmies extends ChildController implements Initializable {
     //TODO: change initialDirectory
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        fileChooser.setInitialDirectory(new File("C:\\Users\\charl\\Documents\\IDATT2001\\WarGames CC\\WarGames"));
+        fileChooser.setInitialDirectory(new File("C:\\Users"));
     }
 
     public void importFileOne(ActionEvent event) {
@@ -70,6 +71,7 @@ public class ImportArmies extends ChildController implements Initializable {
 
     public void importedSuccessfully(){
         infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+        infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY, Insets.EMPTY)));
         infoText.setText("File imported successfully!");
     }
 
@@ -78,6 +80,7 @@ public class ImportArmies extends ChildController implements Initializable {
             parent.show("ViewImportedArmyOne.fxml");
         }else{
             infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+            infoPane.setBackground(new Background(new BackgroundFill(Color.web("#FE7658"),CornerRadii.EMPTY,Insets.EMPTY)));
             infoText.setText("Must import armies before continuing!");
         }
     }

@@ -6,18 +6,18 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CavalryUnit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.InfantryUnit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.RangedUnit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ListenerTest implements ChangeInHealth {
-    ChangeInHealth changeInHealth;
     Army humans, orcs;
-    Battle battle;
     InfantryUnit infantryUnit;
     RangedUnit rangedUnit;
+    int changeInHealth;
 
     @BeforeEach
-    public void reset() {
+    void reset() {
         humans = new Army("humans");
         orcs = new Army("Orcs");
 
@@ -31,24 +31,19 @@ public class ListenerTest implements ChangeInHealth {
 
     }
 
+
     @Test
     void testHealthChange(){
         infantryUnit.setChangeInHealthListener(this);
-        rangedUnit.setChangeInHealthListener(this);
         rangedUnit.attack(infantryUnit);
-        System.out.println(infantryUnit.getHealth());
-
-        rangedUnit.attack(infantryUnit);
-        System.out.println(infantryUnit.getHealth());
-
-        infantryUnit.attack(rangedUnit);
+        Assertions.assertEquals(7,changeInHealth);
 
 
     }
 
     @Override
     public void changeInHealth(Unit unit, int startHealth, int currentHealth) {
-        System.out.println("change in health " + unit.getName());
+        changeInHealth = (startHealth - currentHealth);
     }
 }
 

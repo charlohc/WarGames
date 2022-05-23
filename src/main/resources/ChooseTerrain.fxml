@@ -12,7 +12,7 @@
             <Font name="System Bold" size="16.0" />
          </font>
       </Label>
-      <Text layoutX="251.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="you are now going to choose what terrain the battle will occure in" wrappingWidth="429.0205078125">
+      <Text layoutX="251.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You are now going to choose what terrain the battle will occure in" wrappingWidth="429.0205078125">
          <font>
             <Font size="14.0" />
          </font>
@@ -45,7 +45,7 @@
       <Button fx:id="Plains" layoutX="584.0" layoutY="187.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#terrainPlains" text="Plains" />
       <Button fx:id="Hill" layoutX="390.0" layoutY="187.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#terrainHill" text="Hill" />
       <Button fx:id="confirm" disable="true" layoutX="381.0" layoutY="525.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#confirmTerrain" text="Confirm terrain" />
-      <Text fx:id="Vs" layoutX="405.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;">
+      <Text fx:id="Vs" layoutX="402.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

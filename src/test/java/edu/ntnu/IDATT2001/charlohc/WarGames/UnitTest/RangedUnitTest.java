@@ -10,7 +10,7 @@ class RangedUnitTest {
     RangedUnit rangedUnit1, rangedUnit2,rangedUnit3;
 
     @BeforeEach
-    public void reset(){
+    void reset(){
         try {
             rangedUnit1 = new RangedUnit("Ranged Unit one", 100, 15, 8);
             rangedUnit2 = new RangedUnit("Ranged Unit two", 100, 15, 8);
@@ -29,17 +29,17 @@ class RangedUnitTest {
     @DisplayName("Tests of get resist bonus methode")
     class getResistBonus{
         @Test
-        public void GetResistBonusFirstAttack(){
+        void GetResistBonusFirstAttack(){
           assertEquals(6,rangedUnit1.getResistBonus());
         }
 
         @Test
-        public void GetResistBonusSecondAttack(){
+        void GetResistBonusSecondAttack(){
             rangedUnit1.getResistBonus();
             assertEquals(4,rangedUnit1.getResistBonus());
         }
         @Test
-        public void GetResistBonusThirdAttack(){
+        void GetResistBonusThirdAttack(){
             rangedUnit1.getResistBonus();
             rangedUnit1.getResistBonus();
             assertEquals(2,rangedUnit1.getResistBonus());
@@ -51,17 +51,17 @@ class RangedUnitTest {
     class getAttackBonus{
 
         @Test
-        public void getAttackBonusTerrainHill(){
+        void getAttackBonusTerrainHill(){
             Assertions.assertEquals(6, rangedUnit1.getAttackBonus());
         }
 
         @Test
-        public void getAttackBonusTerrainForrest(){
+        void getAttackBonusTerrainForrest(){
             Assertions.assertEquals(1, rangedUnit2.getAttackBonus());
         }
 
         @Test
-        public void getAttackBonusTerrainPlains(){
+        void getAttackBonusTerrainPlains(){
             Assertions.assertEquals(3, rangedUnit3.getAttackBonus());
         }
     }
@@ -72,14 +72,14 @@ class RangedUnitTest {
         //Health - ((opponent)attack + (opponent)attack bonus) + (armour + resist bonus)
         // 100 - (15 + 6) + (8 + 6) = 93
         @Test
-        public void HealthAfterFirstAttackTerrainTypeHill() {
+        void HealthAfterFirstAttackTerrainTypeHill() {
             rangedUnit1.attack(rangedUnit1);
             assertEquals(93, rangedUnit1.getHealth());
         }
 
         //93 - (15 + 6) + (8 + 4) = 84
         @Test
-        public void HealthAfterSecondAttackTerrainTypeHill() {
+        void HealthAfterSecondAttackTerrainTypeHill() {
             rangedUnit1.attack(rangedUnit1);
             rangedUnit1.attack(rangedUnit1);
             assertEquals(84, rangedUnit1.getHealth());
@@ -87,7 +87,7 @@ class RangedUnitTest {
 
         //84 - (15 + 6) + (8 + 2) = 73
         @Test
-        public void HealthAfterThirdAttackTerrainTypeHill() {
+        void HealthAfterThirdAttackTerrainTypeHill() {
             rangedUnit1.attack(rangedUnit1);
             rangedUnit1.attack(rangedUnit1);
             rangedUnit1.attack(rangedUnit1);
@@ -101,14 +101,14 @@ class RangedUnitTest {
     class attackTerrainForrest {
         //100 - (15 + 1) + (8 + 6)
         @Test
-        public void HealthAfterFirstAttackTerrainTypeForrest() {
+        void HealthAfterFirstAttackTerrainTypeForrest() {
             rangedUnit2.attack(rangedUnit2);
             assertEquals(98, rangedUnit2.getHealth());
         }
 
         //98 - (15 + 1) + (8 + 4) = 94
         @Test
-        public void HealthAfterSecondAttackTerrainTypeForrest() {
+        void HealthAfterSecondAttackTerrainTypeForrest() {
             rangedUnit2.attack(rangedUnit2);
             rangedUnit2.attack(rangedUnit2);
             assertEquals(94, rangedUnit2.getHealth());
@@ -116,7 +116,7 @@ class RangedUnitTest {
 
         //94 - (15 + 1) + (8 + 2) = 88
         @Test
-        public void HealthAfterThirdAttackTerrainTypeForrest() {
+        void HealthAfterThirdAttackTerrainTypeForrest() {
             rangedUnit2.attack(rangedUnit2);
             rangedUnit2.attack(rangedUnit2);
             rangedUnit2.attack(rangedUnit2);
@@ -124,21 +124,20 @@ class RangedUnitTest {
         }
     }
 
-    //TODO: test attack terrain plains
 
     @Nested
     @DisplayName("Test attack methode when terrain type is plains")
     class attackTerrainPlains{
         //100 - (15 + 3 ) + (8 + 6) = 96
         @Test
-        public void HealthAfterFirstAttackTerrainTypePlains() {
+        void HealthAfterFirstAttackTerrainTypePlains() {
             rangedUnit3.attack(rangedUnit3);
             assertEquals(96, rangedUnit3.getHealth());
         }
 
         //96 - (15 + 3 ) + (8 + 4) = 90
         @Test
-        public void HealthAfterSecondAttackTerrainTypePlains() {
+        void HealthAfterSecondAttackTerrainTypePlains() {
             rangedUnit3.attack(rangedUnit3);
             rangedUnit3.attack(rangedUnit3);
             assertEquals(90, rangedUnit3.getHealth());
@@ -146,7 +145,7 @@ class RangedUnitTest {
 
         //90 - (15 + 3 ) + (8 + 2) = 82
         @Test
-        public void HealthAfterThirdAttackTerrainTypePlains() {
+        void HealthAfterThirdAttackTerrainTypePlains() {
             rangedUnit3.attack(rangedUnit3);
             rangedUnit3.attack(rangedUnit3);
             rangedUnit3.attack(rangedUnit3);
@@ -155,7 +154,7 @@ class RangedUnitTest {
     }
 
     @Test
-    public void differentTerrainsAttack(){
+    void differentTerrainsAttack(){
         assertThrows(IllegalArgumentException.class,() -> rangedUnit1.attack(rangedUnit3));
     }
 }

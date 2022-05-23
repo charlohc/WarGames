@@ -17,7 +17,7 @@ class BattleTest {
     CavalryUnit cavalryUnit, cavalryUnit2;
 
     @BeforeEach
-    public void reset() {
+    void reset() {
         humans = new Army("humans");
         orcs = new Army("Orcs");
 
@@ -52,7 +52,6 @@ class BattleTest {
             Assertions.assertEquals(TerrainTypesENUM.PLAINS, battle.getTerrainTypes());
         }
     }
-
 
     @Test
     void getTerrainFromUnit(){

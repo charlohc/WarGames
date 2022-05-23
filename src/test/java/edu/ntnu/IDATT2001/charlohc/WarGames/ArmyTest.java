@@ -11,14 +11,13 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//TODO: go trough and make sure not missing any tests
+
 class ArmyTest {
     Army army;
     Unit unit1, unit2, unit3;
 
     @BeforeEach
-    public void reset() {
-    try {
+    void reset() {
         army = new Army("Army");
         unit1 = new CavalryUnit("Cavalry Unit one", 100);
         unit2 = new InfantryUnit("Infantry Unit one", 100);
@@ -27,19 +26,15 @@ class ArmyTest {
         army.addUnit(unit1);
         army.addUnit(unit2);
 
-
-    }catch (Exception e) {
-        System.out.println("Error: " + e.getMessage());
-    }
 }
 
     @Test
-    public void AddUnitTest(){
+    void AddUnitTest(){
         assertTrue(army.hasUnit());
     }
 
     @Test
-    public void AddAllUnitTest(){
+    void AddAllUnitTest(){
         ArrayList<Unit> allUnitsList = new ArrayList<>();
 
         allUnitsList.add(unit1);
@@ -59,12 +54,12 @@ class ArmyTest {
         Assertions.assertFalse(army.containsUnit(unit3));
     }
     @Test
-    public void hasUnitsTrueTest(){
+    void hasUnitsTrueTest(){
         assertTrue(army.hasUnit());
     }
 
     @Test
-    public void hasUnitsFalseTest(){
+    void hasUnitsFalseTest(){
         army.removeUnit(unit1);
         army.removeUnit(unit2);
         assertFalse(army.hasUnit());

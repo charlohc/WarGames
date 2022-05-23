@@ -7,6 +7,7 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
 import javafx.application.Platform;
+import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -19,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
@@ -28,25 +30,24 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
     Battle copyBattle;
     TerrainTypesENUM terrainType;
     Thread battleThread;
+    Unit testEqualsOne, testEqualsTwo;
     UnitFactory unitFactory = new UnitFactory();
 
-    @FXML public Text unitOne,unitTwo, armyOneName, armyTwoName, healthOne, healthTwo,winnerArmyText,unitsArmyOne,unitsArmyTwo;
+    @FXML
+    public Text unitOne,unitTwo, armyOneName, armyTwoName, healthOne, healthTwo,winnerArmyText,unitsArmyOne,unitsArmyTwo;
     public Text oneAttackBonus, twoAttackBonus, oneResistBonus, twoResistBonus, damageOne, damageTwo, attacks;
     public Button startSimulation;
     public Pane damageOnePane, damageTwoPane, attackInfoPane, mainPane, numberUnitsType;
     public ImageView imageView;
-
-    Image forrest = new Image("file:forrest.png");
-    Image plains = new Image("file:plains.png");
-    Image hill = new Image("file:hill.png");
-
-    @FXML
-    public TableView<Unit> tableView;
-
-    @FXML
     public TableColumn<Unit,String> typeColumn;
     public TableColumn<Unit,String> nameColumn;
     public TableColumn<Unit,Integer> healthColumn;
+    public TableView<Unit> tableView;
+    public Rectangle healthBarOne, healthBarTwo;
+
+    Image forrest = new Image("file:img/forrest.png");
+    Image plains = new Image("file:img/plains.png");
+    Image hill = new Image("file:img/hill.png");
 
     private ObservableList<Unit> units = FXCollections.observableArrayList();
 
@@ -99,24 +100,29 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
         }
     }
 
-//2000
     @Override
     public void changeInHealth(Unit unit, int startHealth, int currentHealth) {
         try {
-            Thread.sleep(1100);
+            Thread.sleep(1300);
                 damageOne.setText("");
                 damageTwo.setText("");
+
                 if (armyOneCopy.containsUnit(unit)) {
                     damageOne.setText("Damage: " + (startHealth - currentHealth));
+                    float percentage = (currentHealth /(float) startHealth);
+                    float width = (percentage * 143);
+                    healthBarOne.setWidth(width);
                 }
 
                 if (armyTwoCopy.containsUnit(unit)) {
                     damageTwo.setText("Damage : " + (startHealth - currentHealth));
+                    float percentage = (currentHealth /(float) startHealth);
+                    float width = (percentage * 143);
+                    healthBarTwo.setWidth(width);
                 }
 
         } catch (IndexOutOfBoundsException | InterruptedException e) {
             e.printStackTrace();
-            System.out.println("Something happened!");
         }
 
     }
