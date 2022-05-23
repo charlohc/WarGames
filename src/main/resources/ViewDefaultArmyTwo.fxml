@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="scenePane" minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.DefaultArmyOne">
+<Pane fx:id="scenePane" minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.Controllers.DefaultArmyTwo">
     <children>
-        <Label layoutX="390.0" layoutY="25.0" text="View Army One">
+        <Label layoutX="390.0" layoutY="25.0" text="View Army Two">
             <font>
                 <Font name="System Bold" size="16.0" />
             </font></Label>
@@ -14,7 +14,7 @@
             <font>
                 <Font size="14.0" />
             </font></Button>
-        <Button layoutX="700.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#viewArmyTwo" text="View ArmyTwo">
+        <Button layoutX="700.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#viewArmyTwo" text="View Terrain">
             <font>
                 <Font size="14.0" />
             </font>
@@ -28,14 +28,14 @@
                         <TableColumn fx:id="healthColumn" minWidth="0.0" prefWidth="152.800048828125" text="Health" />
                     </columns>
                 </TableView>
-                <Text fx:id="armyName" layoutX="80.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                <Text fx:id="armyName" layoutX="80.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-underline: true;">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>
                 </Text>
             </children>
         </Pane>
-        <Text layoutX="360.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can se the default army one">
+        <Text layoutX="350.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can se the default army two">
             <font>
                 <Font size="14.0" />
             </font>

@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
@@ -58,7 +58,7 @@ public class ViewImportedArmyOne extends ChildController {
         numbRanged.setY(200);
         numbRanged.setX(480);
 
-        Text numbInfantry = new Text("Infantry units: " + currentArmy.getCavalryUnits().size());
+        Text numbInfantry = new Text("Infantry units: " + currentArmy.getInfantryUnits().size());
         numbInfantry.setY(200);
         numbInfantry.setX(630);
 
@@ -66,7 +66,11 @@ public class ViewImportedArmyOne extends ChildController {
     }
 
         public void goBack(ActionEvent event) {
-            parent.show("ImportArmies.fxml");
+            if(parent.importedArmies){
+                parent.show("ImportArmies.fxml");
+            }else {
+                parent.show("Home.fxml");
+            }
         }
 
     public void viewImportedArmyTwo(ActionEvent event) {

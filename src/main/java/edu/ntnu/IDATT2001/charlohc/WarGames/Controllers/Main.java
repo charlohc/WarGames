@@ -1,10 +1,8 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;

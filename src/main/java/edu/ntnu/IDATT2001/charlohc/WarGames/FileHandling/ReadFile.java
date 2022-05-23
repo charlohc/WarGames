@@ -1,6 +1,9 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Exceptions.FileEmptyException;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Exceptions.UnitException;
+import edu.ntnu.IDATT2001.charlohc.WarGames.Exceptions.WrongFormatException;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
@@ -19,7 +22,7 @@ public class ReadFile {
     public ReadFile() {
     }
 
-    public Army ReadFileGivenFile(File file)  {
+    public Army ReadFileGivenFile(File file){
         Scanner fileReader = null;
         try {
             fileReader = new Scanner(file);
@@ -45,8 +48,8 @@ public class ReadFile {
         }
         exceptionsFile(file, unitsFromFile);
         fileReader.close();
-         army = new Army(armyName, unitsFromFile);
-        System.out.println(army.getAllUnits());
+
+        army = new Army(armyName, unitsFromFile);
         return army;
     }
 

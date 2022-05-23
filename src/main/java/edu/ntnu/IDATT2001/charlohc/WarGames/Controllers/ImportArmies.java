@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.ReadFile;
@@ -17,7 +17,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 //TODO: make import army two as one
-public class ImportArmiesController extends ChildController implements Initializable {
+public class ImportArmies extends ChildController implements Initializable {
     FileChooser fileChooser = new FileChooser();
     ReadFile readFile;
     Army armyOne, armyTwo;

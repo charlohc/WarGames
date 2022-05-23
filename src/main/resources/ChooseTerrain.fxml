@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.BattleController">
+<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.Controllers.ChooseTerrain">
    <children>
-      <Label layoutX="405.0" layoutY="25.0" prefHeight="25.0" prefWidth="106.0" text="Battle setup">
+      <Label layoutX="405.0" layoutY="25.0" prefHeight="25.0" prefWidth="106.0" text="Select terrain">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
@@ -23,8 +24,9 @@
       </Text>
       <Button layoutX="45.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#goBack" text="Go Back" />
       <Button fx:id="simulate" disable="true" layoutX="700.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#simulateBattle" text="Simulate battle" />
-      <Pane fx:id="background" layoutX="177.0" layoutY="260.0" prefHeight="267.0" prefWidth="558.0" style="-fx-border-color: black;">
+      <Pane fx:id="background" layoutX="177.0" layoutY="235.0" prefHeight="267.0" prefWidth="558.0" style="-fx-border-color: black;">
          <children>
+            <ImageView fx:id="imageView" fitHeight="267.0" fitWidth="558.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true" />
             <Pane layoutX="28.0" layoutY="26.0" prefHeight="214.0" prefWidth="497.0" style="-fx-border-color: black; -fx-background-color: white;">
                <children>
                   <Text fx:id="stats" layoutX="30.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;">
@@ -34,16 +36,16 @@
                   </Text>
                </children></Pane>
          </children></Pane>
-      <Button fx:id="Forrest" layoutX="199.0" layoutY="210.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#terrainForrest" text="Forrest" />
-      <Button fx:id="Plains" layoutX="584.0" layoutY="210.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#terrainPlains" text="Plains" />
-      <Button fx:id="Hill" layoutX="390.0" layoutY="210.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#terrainHill" text="Hill" />
-      <Button fx:id="confirm" disable="true" layoutX="381.0" layoutY="550.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#confirmTerrain" text="Confirm terrain" />
-      <Text fx:id="Vs" layoutX="410.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;">
+      <Button fx:id="Forrest" layoutX="199.0" layoutY="187.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#terrainForrest" text="Forrest" />
+      <Button fx:id="Plains" layoutX="584.0" layoutY="187.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#terrainPlains" text="Plains" />
+      <Button fx:id="Hill" layoutX="390.0" layoutY="187.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#terrainHill" text="Hill" />
+      <Button fx:id="confirm" disable="true" layoutX="381.0" layoutY="525.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#confirmTerrain" text="Confirm terrain" />
+      <Text fx:id="Vs" layoutX="405.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-weight: bold;">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Text>
-      <Pane fx:id="infoPane" layoutX="249.0" layoutY="607.0" prefHeight="40.0" prefWidth="408.0">
+      <Pane fx:id="infoPane" layoutX="249.0" layoutY="590.0" minHeight="54.0" minWidth="408.0">
          <children>
             <Text fx:id="infoBattle" layoutX="50.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>

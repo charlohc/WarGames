@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Battle;
@@ -15,13 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
 //TODO: must make own armyCopy constructor
-public class SimulateBattleController extends ChildController implements ChangeInHealth {
+public class SimulateBattle extends ChildController implements ChangeInHealth {
     Army armyOneOriginal, armyTwoOriginal,armyOneCopy, armyTwoCopy;
     Battle copyBattle;
     TerrainTypesENUM terrainType;
@@ -29,8 +30,9 @@ public class SimulateBattleController extends ChildController implements ChangeI
     UnitFactory unitFactory = new UnitFactory();
 
     @FXML public Text unitOne,unitTwo, armyOneName, armyTwoName, healthOne, healthTwo,winnerArmyText,unitsArmyOne,unitsArmyTwo;
-    public Text oneAttackBonus, twoAttackBonus, oneResistBonus, twoResistBonus, damageOne, damageTwo;
+    public Text oneAttackBonus, twoAttackBonus, oneResistBonus, twoResistBonus, damageOne, damageTwo, attacks;
     public Button startSimulation;
+    public Pane damageOnePane, damageTwoPane, attackInfoPane, mainPane;
 
     @FXML
     public TableView<Unit> tableView;
@@ -114,7 +116,10 @@ public class SimulateBattleController extends ChildController implements ChangeI
                 if(finalWinnerArmy != null){
                     winnerArmyText.setText("Winner: " + finalWinnerArmy.getName());
                     viewWinnerArmy(finalWinnerArmy);
-                    System.out.println(finalWinnerArmy);
+                    numberOfUnits(finalWinnerArmy);
+                    damageOnePane.setOpacity(0);
+                    damageTwoPane.setOpacity(0);
+                    attackInfoPane.setOpacity(0);
                     damageOne.setText("");
                     damageTwo.setText("");
                     startSimulation.setDisable(false);
@@ -128,7 +133,6 @@ public class SimulateBattleController extends ChildController implements ChangeI
 
         Thread messageThread = new Thread(() -> {
             while(battleThread.isAlive() && copyBattle.getDefender() != null){
-
                 battleInfo();
 
                 for(Unit unitOne : armyOneCopy.getAllUnits()){
@@ -138,6 +142,7 @@ public class SimulateBattleController extends ChildController implements ChangeI
                 for(Unit unitTwo : armyTwoCopy.getAllUnits()){
                     unitTwo.setChangeInHealthListener(this);
                 }
+
 
                 Platform.runLater(() ->{
 
@@ -184,10 +189,16 @@ public class SimulateBattleController extends ChildController implements ChangeI
 
     private void viewWinnerArmy(Army winnerArmy) {
         tableView.setOpacity(1);
-        for(Unit unit : winnerArmy.getAllUnits()){
-            if(!units.contains(unit)){
-                units.add(unit);
+
+        try {
+            for (Unit unit : winnerArmy.getAllUnits()) {
+                if (!units.contains(unit)) {
+                    units.add(unit);
+                }
             }
+        }catch (IndexOutOfBoundsException e){
+            e.printStackTrace();
+            System.out.println("something happened");
         }
 
         tableView.setItems(units);
@@ -200,17 +211,22 @@ public class SimulateBattleController extends ChildController implements ChangeI
     public void battleInfo(){
         startSimulation.setDisable(true);
 
+        attacks.setText(copyBattle.getAttacker().getName() +  " attacks " + copyBattle.getDefender().getName() + "!");
+
         if(armyOneCopy.containsUnit(copyBattle.getAttacker())){
             unitOne.setText(copyBattle.getAttacker().getName());
             healthOne.setText(String.valueOf(copyBattle.getAttacker().getHealth()));
             oneAttackBonus.setText(String.valueOf(copyBattle.getAttacker().getAttackBonus() + copyBattle.getAttacker().getAttackValue()));
             oneResistBonus.setText(String.valueOf(copyBattle.getAttacker().getResistBonus() + copyBattle.getAttacker().getArmor()));
 
+            healthOne.setFill(Color.BLACK);
+
         }else{
             unitOne.setText(copyBattle.getDefender().getName());
             healthOne.setText(String.valueOf(copyBattle.getDefender().getHealth()));
             oneAttackBonus.setText(String.valueOf(copyBattle.getDefender().getAttackBonus() + copyBattle.getDefender().getAttackValue()));
             oneResistBonus.setText(String.valueOf(copyBattle.getDefender().getResistBonus() + copyBattle.getDefender().getArmor()));
+
         }
 
         if(armyTwoCopy.containsUnit(copyBattle.getAttacker())){
@@ -218,6 +234,7 @@ public class SimulateBattleController extends ChildController implements ChangeI
             healthTwo.setText(String.valueOf(copyBattle.getAttacker().getHealth()));
             twoAttackBonus.setText(String.valueOf(copyBattle.getAttacker().getAttackBonus() + copyBattle.getAttacker().getAttackValue()));
             twoResistBonus.setText(String.valueOf(copyBattle.getAttacker().getResistBonus() + copyBattle.getAttacker().getArmor()));
+
 
         }else{
             unitTwo.setText(copyBattle.getDefender().getName());
@@ -230,14 +247,34 @@ public class SimulateBattleController extends ChildController implements ChangeI
 
     }
 
+    public void numberOfUnits(Army winnerArmy){
+        Text numbCavalry = new Text("Cavalry units: " + winnerArmy.getCavalryUnits().size());
+        numbCavalry.setY(40);
+        numbCavalry.setX(20);
+
+        Text numbCommander = new Text("Commander units: " + winnerArmy.getCommanderUnits().size());
+        numbCommander.setY(40);
+        numbCommander.setX(130);
+
+        Text numbRanged = new Text("Ranged units: " + winnerArmy.getRangedUnits().size());
+        numbRanged.setY(40);
+        numbRanged.setX(260);
+
+        Text numbInfantry = new Text("Infantry units: " + winnerArmy.getInfantryUnits().size());
+        numbInfantry.setY(40);
+        numbInfantry.setX(370);
+
+        mainPane.getChildren().addAll(numbCavalry,numbCommander,numbRanged,numbInfantry);
+    }
+
     public void reStart(){
         startSimulation.setOnAction(event -> {
-            parent.show("simulateBattle.fxml");
+            parent.show("SimulateBattle.fxml");
         });
     }
 
     public void goBack(ActionEvent event) {
-        parent.show("battle.fxml");
+        parent.show("ChooseTerrain.fxml");
     }
 
 }

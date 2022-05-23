@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import javafx.event.ActionEvent;
 
@@ -10,7 +10,7 @@ public class HomeController extends ChildController {
     }
 
     public void createArmies(ActionEvent event) {
-        parent.show("createArmyOne.fxml");
+        parent.show("CreateArmyOne.fxml");
     }
 
     public void importArmies(ActionEvent event) {
@@ -18,6 +18,6 @@ public class HomeController extends ChildController {
     }
 
     public void defaultArmies(ActionEvent event) {
-        parent.show("defaultArmyOne.fxml");
+        parent.show("ViewDefaultArmyOne.fxml");
     }
 }

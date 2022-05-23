@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.CreateArmyTwoController">
+<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.Controllers.CreateArmyTwo">
     <children>
         <Label layoutX="390.0" layoutY="25.0" style="-fx-font-weight: bold;" text="Create Army Two">
             <font>
@@ -16,7 +16,7 @@
                 <Font size="14.0" />
             </font>
         </Text>
-        <Text layoutX="130.0" layoutY="102.0" strokeType="OUTSIDE" strokeWidth="0.0" text="In each army there will be several units which you will create, on the next page you can se and edit the units">
+        <Text layoutX="215.0" layoutY="101.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Each army consists of one or more units, on the next page you can se and edit the units">
             <font>
                 <Font size="14.0" />
             </font>
@@ -90,9 +90,9 @@
             <font>
                 <Font size="14.0" />
             </font></Text>
-        <Pane fx:id="infoPane" layoutX="259.0" layoutY="608.0" prefHeight="47.0" prefWidth="386.0">
+        <Pane fx:id="infoPane" layoutX="215.0" layoutY="608.0" minHeight="47.0" minWidth="386.0">
             <children>
-                <Text fx:id="info" layoutX="100.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                <Text fx:id="info" layoutX="15.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0">
                     <font>
                         <Font name="System Bold" size="14.0" />
                     </font>

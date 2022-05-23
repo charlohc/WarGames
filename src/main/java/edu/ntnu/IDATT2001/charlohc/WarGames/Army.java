@@ -19,8 +19,9 @@ public class Army {
      * @param name name of army
      * @param units list of units
      */
-    public Army(String name, List<Unit> units)throws IllegalArgumentException {
+    public Army(String name, List<Unit> units) throws IllegalArgumentException {
         if(name.isBlank()){throw new IllegalArgumentException("Name of army can not be blank");}
+        if(name.contains(",")){throw new IllegalArgumentException( "Name can not contain ','");}
         this.name = name;
         this.units = units;
     }

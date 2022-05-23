@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
@@ -9,9 +9,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class ViewArmyTwo extends ChildController {
+public class ViewImportedArmyTwo extends ChildController {
 
     @FXML
     public TableView<Unit> tableView;
@@ -20,7 +21,8 @@ public class ViewArmyTwo extends ChildController {
     public TableColumn<Unit,String> typeColumn;
     public TableColumn<Unit,String> nameColumn;
     public TableColumn<Unit,Integer> healthColumn;
-
+    @FXML
+    Pane scenePane;
     @FXML
     public Text armyName;
 
@@ -38,20 +40,39 @@ public class ViewArmyTwo extends ChildController {
         typeColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("unitType"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("name"));
         healthColumn.setCellValueFactory(new PropertyValueFactory<Unit, Integer>("health"));
+
+        numbersOfUnitText();
     }
 
-    @FXML
-    public void removeUnit() {
-        Unit toRemove = tableView.getSelectionModel().getSelectedItem();
-        units.remove(toRemove);
-        currentArmy.getAllUnits().remove(toRemove);
+
+    public void numbersOfUnitText(){
+        Text numbCavalry = new Text("Cavalry units: " + currentArmy.getCavalryUnits().size());
+        numbCavalry.setY(200);
+        numbCavalry.setX(190);
+
+        Text numbCommander = new Text("Commander units: " + currentArmy.getCommanderUnits().size());
+        numbCommander.setY(200);
+        numbCommander.setX(330);
+
+        Text numbRanged = new Text("Ranged units: " + currentArmy.getRangedUnits().size());
+        numbRanged.setY(200);
+        numbRanged.setX(480);
+
+        Text numbInfantry = new Text("Infantry units: " + currentArmy.getInfantryUnits().size());
+        numbInfantry.setY(200);
+        numbInfantry.setX(630);
+
+        scenePane.getChildren().addAll(numbCavalry,numbCommander,numbRanged,numbInfantry);
     }
 
-    public void battleScene(ActionEvent event) {
-        parent.show("battle.fxml");
+
+    public void chooseTerrain(ActionEvent event) {
+        parent.importedArmies = true;
+        parent.customArmy = false;
+        parent.show("ChooseTerrain.fxml");
     }
 
     public void goBack(ActionEvent event) {
-        parent.show("createArmyTwo.fxml");
+        parent.show("ViewImportedArmyOne.fxml");
     }
 }

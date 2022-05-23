@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane fx:id="scenePane" minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.ViewImportedArmyTwo">
+<Pane fx:id="scenePane" minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.Controllers.ViewImportedArmyTwo">
     <children>
         <Label layoutX="390.0" layoutY="25.0" text="View Army Two">
             <font>
@@ -28,7 +28,7 @@
                         <TableColumn fx:id="healthColumn" minWidth="0.0" prefWidth="152.800048828125" text="Health" />
                     </columns>
                 </TableView>
-                <Text fx:id="armyName" layoutX="80.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                <Text fx:id="armyName" layoutX="80.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-underline: true;">
                     <font>
                         <Font name="System Bold" size="15.0" />
                     </font>

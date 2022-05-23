@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Exceptions;
 
 public class WrongFormatException extends Exception{
 

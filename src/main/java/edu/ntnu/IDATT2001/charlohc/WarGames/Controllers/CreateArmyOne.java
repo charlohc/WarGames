@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.WriteFile;
@@ -23,7 +23,7 @@ import javafx.scene.text.Text;
 import java.util.List;
 
 
-public class CreateArmyOneController extends ChildController{
+public class CreateArmyOne extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
     WriteFile writeFile;
@@ -87,52 +87,65 @@ public class CreateArmyOneController extends ChildController{
 
     public void newArmy(ActionEvent event) {
         if(nameArmy.getText().isBlank()){
-            blankName();
+            invalidArmy();
+
         }else {
             currentArmy = new Army(nameArmy.getText());
 
-            info.setText(nameArmy.getText() + " is ready for battle!");
-            addUnit.setDisable(false);
-            addFiveUnits.setDisable(false);
-            viewArmy.setDisable(false);
+            if(currentArmy.getName().contains(",")){
+                invalidArmy();
+            }else {
+                info.setText(nameArmy.getText() + " is almost ready for battle, only needs units...");
+                infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+                infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY,Insets.EMPTY)));
+                addUnit.setDisable(false);
+                addFiveUnits.setDisable(false);
+                viewArmy.setDisable(false);
+                confirm.setDisable(true);
 
-            parent.currentArmyOne = currentArmy;
+                parent.currentArmyOne = currentArmy;
+            }
         }
     }
 
     public void addUnit(MouseEvent event) {
-        if(nameUnit.getText().isBlank()){
-          blankName();
+        if(nameUnit.getText().isBlank() || nameUnit.getText().contains(",") || unitType == null){
+          invalidUnit();
+
         }else {
             newUnit = unitFactory.createUnitByType(unitType, nameUnit.getText(), health.getValue());
-            units.add(newUnit);
 
-            currentArmy.addUnit(newUnit);
+                units.add(newUnit);
 
-            nameUnit.clear();
+                currentArmy.addUnit(newUnit);
 
-            numbersOfUnits++;
-            info();
+                nameUnit.clear();
+
+                numbersOfUnits++;
+                info();
         }
     }
 
     public void addFiveUnits(ActionEvent event){
-        if(nameUnit.getText().isBlank()){
-           blankName();
+        if(nameUnit.getText().isBlank() || nameUnit.getText().contains(",") || unitType == null ){
+           invalidUnit();
+
         }else {
             newUnits = unitFactory.createListOfUnits(5, unitType, nameUnit.getText(), health.getValue());
 
-            units.addAll(newUnit);
-            currentArmy.addAllUnits(newUnits);
+                units.addAll(newUnit);
+                currentArmy.addAllUnits(newUnits);
 
-            nameUnit.clear();
-            numbersOfUnits += 5;
-            info();
+                nameUnit.clear();
+                numbersOfUnits += 5;
+                info();
+
         }
     }
 
     public void info(){
         infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+        infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY,Insets.EMPTY)));
         if(numbersOfUnits > 0){
             info.setText("Numbers of units registered : " + numbersOfUnits);
         }
@@ -148,7 +161,7 @@ public class CreateArmyOneController extends ChildController{
             ranged.setBackground(new Background(new BackgroundFill(Color.web("#FAFAFA"), new CornerRadii(0), Insets.EMPTY)));
 
         }
-        pane.setBackground(new Background(new BackgroundFill(Color.web("#C7DFC5"), new CornerRadii(0), Insets.EMPTY)));
+        pane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"), new CornerRadii(0), Insets.EMPTY)));
         unitTypeSelected = true;
         unitType = UnitTypeENUM.valueOf(pane.getId().toUpperCase());
         testUnit = unitFactory.createUnitByType(unitType,"test",1);
@@ -157,15 +170,23 @@ public class CreateArmyOneController extends ChildController{
         attack.setText(String.valueOf(testUnit.getAttackValue()));
     }
 
-    public void blankName(){
+    public void invalidUnit(){
         infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
-        info.setText("Name can not be blank!");
+        infoPane.setBackground(new Background(new BackgroundFill(Color.web("#FE7658"),CornerRadii.EMPTY,Insets.EMPTY)));
+        info.setText("Invalid unit: must contain all info, and name can not contain ','");
     }
+
+    public void invalidArmy(){
+        infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+        infoPane.setBackground(new Background(new BackgroundFill(Color.web("#FE7658"),CornerRadii.EMPTY,Insets.EMPTY)));
+        info.setText("Invalid input: Army name can not be blank nor contain ','");
+    }
+
 
     public void viewArmy(ActionEvent event){
         parent.armies.add(currentArmy);
-        writeFile.printTxt(currentArmy);
-        parent.show("viewArmy.fxml");
+        //writeFile.printTxt(currentArmy);
+        parent.show("ViewCustomArmyOne.fxml");
 
     }
     public void goBack(ActionEvent event) {

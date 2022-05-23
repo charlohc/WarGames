@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Battle;
@@ -24,13 +24,15 @@ public class MainController {
 
     @FXML public BorderPane scenePane;
     HostServices hostServices;
-     boolean isLightMode = true;
 
     protected ObservableList<Army> armies = FXCollections.observableArrayList();
     protected Unit unit;
     protected Army currentArmyOne,currentArmyTwo;
     protected Battle battle;
     protected TerrainTypesENUM terrainTypes;
+    protected Boolean customArmy, importedArmies;
+
+    //TODO: save armies after exiting
 
     /**
      * Method to show a given .fxml file when executed.
@@ -57,25 +59,5 @@ public class MainController {
             System.out.println(npe);
             npe.printStackTrace();
         }
-    }
-
-    @FXML
-    public void changeLight() {
-        System.out.println("hei");
-        isLightMode = !isLightMode;
-        if(isLightMode) {
-            System.out.println("hei");
-            scenePane.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
-        }else{
-            System.out.println("nei");
-            scenePane.setBackground(new Background(new BackgroundFill(Color.WHITE,CornerRadii.EMPTY,Insets.EMPTY)));
-        }
-
-
-    }
-
-    @FXML
-    public void change(ActionEvent event) {
-        System.out.println("hei");
     }
 }

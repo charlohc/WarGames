@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<Pane minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.gui.ViewArmyController">
+<Pane fx:id="scenePane" minHeight="600.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.Controllers.ViewCustomArmyOne">
    <children>
       <Label layoutX="390.0" layoutY="25.0" text="View Army One">
          <font>
@@ -14,7 +14,7 @@
          <font>
             <Font size="14.0" />
          </font></Button>
-      <Button layoutX="700.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#createArmyTwo" text="Create Army Two">
+      <Button fx:id="createArmyTwo" layoutX="700.0" layoutY="608.0" minHeight="40.0" minWidth="150.0" mnemonicParsing="false" onAction="#createArmyTwo" text="Create Army Two">
          <font>
             <Font size="14.0" />
          </font>
@@ -33,19 +33,27 @@
                   <TableColumn fx:id="healthColumn" minWidth="0.0" prefWidth="152.800048828125" text="Health" />
               </columns>
             </TableView>
-            <Text fx:id="armyName" layoutX="80.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0">
+            <Text fx:id="armyName" layoutX="80.0" layoutY="15.0" strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-underline: true;">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Text>
+            <Pane fx:id="infoPane" layoutX="194.0" layoutY="348.0" minHeight="40.0" minWidth="303.0">
+               <children>
+                  <Text fx:id="info" layoutX="25.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Text>
+               </children></Pane>
          </children>
       </Pane>
-      <Text layoutX="280.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can se the units you have added to the army one">
+      <Text layoutX="280.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Here you can se the units you have added to army one">
          <font>
             <Font size="14.0" />
          </font>
       </Text>
-      <Text layoutX="300.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="you can remove the units and go back and add more">
+      <Text layoutX="300.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="you can remove the units, go back and add more">
          <font>
             <Font size="14.0" />
          </font>

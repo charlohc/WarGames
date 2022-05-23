@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.gui;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
@@ -81,10 +81,12 @@ public class DefaultArmyTwo extends ChildController{
 
 
     public void goBack(ActionEvent event) {
-        parent.show("Home.fxml");
+        parent.show("ViewDefaultArmyOne.fxml");
     }
 
     public void viewArmyTwo(ActionEvent event) {
-        parent.show("battle.fxml");
+        parent.importedArmies = false;
+        parent.customArmy = false;
+        parent.show("ChooseTerrain.fxml");
     }
 }
