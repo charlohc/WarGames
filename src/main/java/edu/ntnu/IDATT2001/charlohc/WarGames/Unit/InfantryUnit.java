@@ -22,7 +22,7 @@ public class InfantryUnit extends Unit {
      */
     @Override
     public int getAttackBonus() {
-        if(getTerrainType().equals(TerrainTypesENUM.FORREST)){
+        if(getTerrainType().equals(TerrainTypesENUM.FOREST)){
             return 6;
         }
         return 2;
@@ -34,7 +34,7 @@ public class InfantryUnit extends Unit {
      */
     @Override
     public int getResistBonus() {
-        if(getTerrainType().equals(TerrainTypesENUM.FORREST)){
+        if(getTerrainType().equals(TerrainTypesENUM.FOREST)){
             return 3;
         }
         return 1;

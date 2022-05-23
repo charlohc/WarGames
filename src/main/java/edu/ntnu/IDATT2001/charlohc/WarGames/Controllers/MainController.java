@@ -7,26 +7,22 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import javafx.application.HostServices;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 
 
-public class MainController {
+public class MainController extends Component {
 
     @FXML public BorderPane scenePane;
     HostServices hostServices;
 
     protected ObservableList<Army> armies = FXCollections.observableArrayList();
-    protected Unit unit;
+    //protected Unit unit;
     protected Army currentArmyOne,currentArmyTwo;
     protected Battle battle;
     protected TerrainTypesENUM terrainTypes;
@@ -59,5 +55,15 @@ public class MainController {
             System.out.println(npe);
             npe.printStackTrace();
         }
+    }
+
+    public Boolean saveArmy() {
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(this, "Do you want to save your army?", "Save", dialogButton);
+            if (dialogResult == 0) {
+                return true;
+            } else {
+                return false;
+            }
     }
 }

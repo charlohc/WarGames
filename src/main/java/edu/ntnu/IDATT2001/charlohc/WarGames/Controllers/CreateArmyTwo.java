@@ -26,7 +26,6 @@ import java.util.List;
 public class CreateArmyTwo extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmyTwo;
-    WriteFile writeFile;
     UnitFactory unitFactory;
     UnitTypeENUM unitType;
     Unit newUnit, testUnit;
@@ -79,12 +78,11 @@ public class CreateArmyTwo extends ChildController{
         infantryImgView.setImage(infantryImg);
         rangedImgView.setImage(rangedImg);
 
-        SpinnerValueFactory<Integer> valueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100);
+        SpinnerValueFactory<Integer> valueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(20, 100);
         health.setValueFactory(valueFactory1);
-        valueFactory1.setValue(1);
+        valueFactory1.setValue(20);
 
         unitFactory = new UnitFactory();
-        writeFile = new WriteFile();
     }
 
     public void newArmy(ActionEvent event) {
@@ -183,10 +181,11 @@ public class CreateArmyTwo extends ChildController{
         info.setText("Invalid input: Army name can not be blank nor contain ','");
     }
 
+
     public void viewArmy(ActionEvent event){
         parent.armies.add(currentArmyTwo);
-        //writeFile.printTxt(currentArmyTwo);
         parent.customArmy = true;
+        parent.importedArmies = false;
         parent.show("ViewCustomArmyTwo.fxml");
 
     }

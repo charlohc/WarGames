@@ -7,12 +7,15 @@ import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 
+import javax.swing.*;
 import java.io.IOException;
 
     public class Main extends Application {
+        MainController mainController = new MainController();
 
         /**
          * Method to start the application.
+         *
          * @param stage the window of the application.
          */
         @Override
@@ -34,9 +37,8 @@ import java.io.IOException;
         }
 
 
-        public static void main(String[] args){
+        public static void main(String[] args) {
             launch(args);
         }
     }
-
 

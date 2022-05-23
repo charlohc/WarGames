@@ -11,7 +11,7 @@ import java.util.Objects;
  * an army is a collection of units
  */
 public class Army {
-    private final String name;
+    private String name;
     private List<Unit> units = new ArrayList<Unit>();
 
     /**
@@ -26,10 +26,12 @@ public class Army {
         this.units = units;
     }
 
-
-
     public Army(String name) {
         this.name = name;
+    }
+
+    public Army(){
+
     }
 
     /**

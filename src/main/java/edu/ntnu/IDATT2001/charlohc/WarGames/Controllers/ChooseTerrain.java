@@ -22,7 +22,7 @@ public class ChooseTerrain extends ChildController{
     @FXML public Pane background, infoPane;
     public ImageView imageView;
 
-    @FXML public Text Vs, stats, infoBattle;
+    @FXML public Text Vs, stats, infoBattle,terrain;
 
     @FXML public Button simulate, confirm;
 
@@ -41,7 +41,7 @@ public class ChooseTerrain extends ChildController{
             simulate.setDisable(false);
             confirm.setDisable(false);
 
-            infoBattle.setText("You have chosen the terrain type: " + terrainType.toString() + " \n you can now start the simulation");
+            infoBattle.setText("You have chosen the terrain type: " + terrainType.toString() + " \n you can now start the simulation...");
             infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
             infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY, Insets.EMPTY)));
         }
@@ -50,7 +50,7 @@ public class ChooseTerrain extends ChildController{
     }
 
     public void terrainForrest(ActionEvent event) {
-        //background.setBackground(new Background(new BackgroundFill(Color.web("#155644"), new CornerRadii(0), Insets.EMPTY)));
+        terrain.setText("Forrest");
        imageView.setImage(forrest);
         stats.setText("""
                 Infantry Unit: advantage in both attack and defence\s
@@ -59,12 +59,12 @@ public class ChooseTerrain extends ChildController{
                  
                  Calvary Unit: disadvantage in defence""");
 
-        terrainType = TerrainTypesENUM.FORREST;
+        terrainType = TerrainTypesENUM.FOREST;
         confirmPossible();
     }
 
     public void terrainPlains(ActionEvent event) {
-        //background.setBackground(new Background(new BackgroundFill(Color.LIGHTGOLDENRODYELLOW, new CornerRadii(0), Insets.EMPTY)));
+        terrain.setText("Plains");
         imageView.setImage(plains);
         stats.setText(" Calvary Unit: advantage in attack");
 
@@ -73,7 +73,7 @@ public class ChooseTerrain extends ChildController{
     }
 
     public void terrainHill(ActionEvent event) {
-        //background.setBackground(new Background(new BackgroundFill(Color.web("#A6C900"), new CornerRadii(0), Insets.EMPTY)));
+        terrain.setText("Hill");
         imageView.setImage(hill);
         stats.setText("Ranged Unit: advantage in attack");
 
@@ -90,7 +90,7 @@ public class ChooseTerrain extends ChildController{
 
         infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
         infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY, Insets.EMPTY)));
-        infoBattle.setText("You have chosen the terrain type: " + terrainType.toString() + " \n you can now start the simulation");
+        infoBattle.setText("You have chosen the terrain type: " + terrainType.toString() + " \n you can now start the simulation...");
 
         battle = new Battle(armyOne,armyTwo,terrainType);
         parent.battle = battle;

@@ -17,7 +17,7 @@ class RangedUnitTest {
             rangedUnit3 = new RangedUnit("Ranged Unit three", 100, 15, 8);
 
             rangedUnit1.setTerrainTypes(TerrainTypesENUM.HILL);
-            rangedUnit2.setTerrainTypes(TerrainTypesENUM.FORREST);
+            rangedUnit2.setTerrainTypes(TerrainTypesENUM.FOREST);
             rangedUnit3.setTerrainTypes(TerrainTypesENUM.PLAINS);
 
         }catch (Exception e){

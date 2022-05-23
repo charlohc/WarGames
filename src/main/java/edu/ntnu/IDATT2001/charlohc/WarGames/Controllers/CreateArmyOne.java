@@ -26,7 +26,6 @@ import java.util.List;
 public class CreateArmyOne extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
-    WriteFile writeFile;
     UnitFactory unitFactory;
     UnitTypeENUM unitType;
     Unit newUnit, testUnit;
@@ -77,12 +76,11 @@ public class CreateArmyOne extends ChildController{
     infantryImgView.setImage(infantryImg);
     rangedImgView.setImage(rangedImg);
 
-        SpinnerValueFactory<Integer> valueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100);
+        SpinnerValueFactory<Integer> valueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(20, 100);
         health.setValueFactory(valueFactory1);
-        valueFactory1.setValue(1);
+        valueFactory1.setValue(20);
 
         unitFactory = new UnitFactory();
-        writeFile = new WriteFile();
     }
 
     public void newArmy(ActionEvent event) {
@@ -183,9 +181,9 @@ public class CreateArmyOne extends ChildController{
     }
 
 
+
     public void viewArmy(ActionEvent event){
         parent.armies.add(currentArmy);
-        //writeFile.printTxt(currentArmy);
         parent.show("ViewCustomArmyOne.fxml");
 
     }

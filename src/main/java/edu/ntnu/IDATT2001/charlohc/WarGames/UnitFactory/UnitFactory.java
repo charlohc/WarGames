@@ -14,14 +14,13 @@ public class UnitFactory {
             case COMMANDER -> new CommanderUnit(name, health);
             case INFANTRY -> new InfantryUnit(name, health);
             case RANGED -> new RangedUnit(name, health);
-            default -> throw new IllegalArgumentException("Unexpected value");
         };
     }
 //Test methode
     public List<Unit> createListOfUnits(int numberOfUnits, UnitTypeENUM unitType, String name, int health) throws IllegalArgumentException{
         ArrayList<Unit> newListOfUnits = new ArrayList<>();
         for (int i = 0; i < numberOfUnits; i++) {
-            newListOfUnits.add(createUnitByType(unitType, name+(i+1), health));
+            newListOfUnits.add(createUnitByType(unitType, name+" "+(i+1), health));
         }
         return newListOfUnits;
     }

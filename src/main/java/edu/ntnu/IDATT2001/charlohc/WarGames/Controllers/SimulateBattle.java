@@ -15,13 +15,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 
-//TODO: must make own armyCopy constructor
 public class SimulateBattle extends ChildController implements ChangeInHealth {
     Army armyOneOriginal, armyTwoOriginal,armyOneCopy, armyTwoCopy;
     Battle copyBattle;
@@ -32,7 +33,12 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
     @FXML public Text unitOne,unitTwo, armyOneName, armyTwoName, healthOne, healthTwo,winnerArmyText,unitsArmyOne,unitsArmyTwo;
     public Text oneAttackBonus, twoAttackBonus, oneResistBonus, twoResistBonus, damageOne, damageTwo, attacks;
     public Button startSimulation;
-    public Pane damageOnePane, damageTwoPane, attackInfoPane, mainPane;
+    public Pane damageOnePane, damageTwoPane, attackInfoPane, mainPane, numberUnitsType;
+    public ImageView imageView;
+
+    Image forrest = new Image("file:forrest.png");
+    Image plains = new Image("file:plains.png");
+    Image hill = new Image("file:hill.png");
 
     @FXML
     public TableView<Unit> tableView;
@@ -49,6 +55,8 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
         armyOneOriginal = parent.currentArmyOne;
         armyTwoOriginal = parent.currentArmyTwo;
         terrainType = parent.terrainTypes;
+
+        setBackgroundImg();
 
         ArrayList<Unit> armyOneUnits = new ArrayList<>();
         for (Unit unit: armyOneOriginal.getAllUnits()){
@@ -80,11 +88,22 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
         });
 
     }
+
+    public void setBackgroundImg(){
+        if(terrainType == TerrainTypesENUM.FOREST){
+            imageView.setImage(forrest);
+        }else if(terrainType == TerrainTypesENUM.PLAINS){
+            imageView.setImage(plains);
+        }else{
+            imageView.setImage(hill);
+        }
+    }
+
 //2000
     @Override
     public void changeInHealth(Unit unit, int startHealth, int currentHealth) {
         try {
-            Thread.sleep(100);
+            Thread.sleep(1100);
                 damageOne.setText("");
                 damageTwo.setText("");
                 if (armyOneCopy.containsUnit(unit)) {
@@ -122,6 +141,8 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
                     attackInfoPane.setOpacity(0);
                     damageOne.setText("");
                     damageTwo.setText("");
+                    healthOne.setText("");
+                    healthTwo.setText("");
                     startSimulation.setDisable(false);
                     startSimulation.setText("Back to start");
                     reStart();
@@ -219,7 +240,6 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
             oneAttackBonus.setText(String.valueOf(copyBattle.getAttacker().getAttackBonus() + copyBattle.getAttacker().getAttackValue()));
             oneResistBonus.setText(String.valueOf(copyBattle.getAttacker().getResistBonus() + copyBattle.getAttacker().getArmor()));
 
-            healthOne.setFill(Color.BLACK);
 
         }else{
             unitOne.setText(copyBattle.getDefender().getName());
@@ -248,20 +268,23 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
     }
 
     public void numberOfUnits(Army winnerArmy){
+
+        numberUnitsType.setOpacity(1);
+
         Text numbCavalry = new Text("Cavalry units: " + winnerArmy.getCavalryUnits().size());
-        numbCavalry.setY(40);
+        numbCavalry.setY(30);
         numbCavalry.setX(20);
 
         Text numbCommander = new Text("Commander units: " + winnerArmy.getCommanderUnits().size());
-        numbCommander.setY(40);
+        numbCommander.setY(30);
         numbCommander.setX(130);
 
         Text numbRanged = new Text("Ranged units: " + winnerArmy.getRangedUnits().size());
-        numbRanged.setY(40);
+        numbRanged.setY(30);
         numbRanged.setX(260);
 
         Text numbInfantry = new Text("Infantry units: " + winnerArmy.getInfantryUnits().size());
-        numbInfantry.setY(40);
+        numbInfantry.setY(30);
         numbInfantry.setX(370);
 
         mainPane.getChildren().addAll(numbCavalry,numbCommander,numbRanged,numbInfantry);
@@ -277,4 +300,7 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
         parent.show("ChooseTerrain.fxml");
     }
 
+    public void home(ActionEvent event) {
+            parent.show("Home.fxml");
+    }
 }

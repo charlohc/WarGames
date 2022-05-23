@@ -2,7 +2,6 @@ package edu.ntnu.IDATT2001.charlohc.WarGames.UnitTest;
 
 //ha test for attack get health
 import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
-import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CavalryUnit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.CommanderUnit;
 import org.junit.jupiter.api.*;
 
@@ -18,7 +17,7 @@ class CommanderUnitTest {
             commanderUnit2 = new CommanderUnit("Commander Unit Two", 100, 20, 12);
             commanderUnit3 = new CommanderUnit("Commander Unit three", 100, 20, 12);
 
-            commanderUnit1.setTerrainTypes(TerrainTypesENUM.FORREST);
+            commanderUnit1.setTerrainTypes(TerrainTypesENUM.FOREST);
             commanderUnit2.setTerrainTypes(TerrainTypesENUM.HILL);
             commanderUnit3.setTerrainTypes(TerrainTypesENUM.PLAINS);
         } catch (Exception e) {

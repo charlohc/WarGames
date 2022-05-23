@@ -1,7 +1,6 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.Unit;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
-import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
 
 /**
@@ -40,7 +39,7 @@ public class CavalryUnit extends Unit {
      */
     @Override
     public int getResistBonus() {
-        if(this.getTerrainType().equals(TerrainTypesENUM.FORREST)){return 0;}
+        if(this.getTerrainType().equals(TerrainTypesENUM.FOREST)){return 0;}
         return 1;
     }
 

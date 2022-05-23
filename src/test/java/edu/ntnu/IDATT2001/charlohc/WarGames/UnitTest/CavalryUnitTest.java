@@ -16,7 +16,7 @@ CavalryUnit cavalryUnit1, cavalryUnit2, cavalryUnit3;
         cavalryUnit2 = new CavalryUnit("Cavalry Unit Two", 100, 20, 12);
         cavalryUnit3 = new CavalryUnit("Cavalry Unit three",100,20,12);
 
-        cavalryUnit1.setTerrainTypes(TerrainTypesENUM.FORREST);
+        cavalryUnit1.setTerrainTypes(TerrainTypesENUM.FOREST);
         cavalryUnit2.setTerrainTypes(TerrainTypesENUM.HILL);
         cavalryUnit3.setTerrainTypes(TerrainTypesENUM.PLAINS);
     }catch (Exception e) {

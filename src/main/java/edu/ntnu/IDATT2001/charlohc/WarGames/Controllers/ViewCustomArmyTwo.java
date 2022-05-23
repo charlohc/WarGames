@@ -1,6 +1,7 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
+import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.WriteFile;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +30,7 @@ public class ViewCustomArmyTwo extends ChildController {
 
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
+    private WriteFile writeFile = new WriteFile();
 
     @Override
     public void load() {
@@ -81,6 +83,12 @@ public class ViewCustomArmyTwo extends ChildController {
         numbersOfUnitText();
     }
 
+    public void saveArmyTwo(){
+        if(parent.saveArmy()){
+            writeFile.printTxt(currentArmy);
+        }
+    }
+
 
     public void chooseTerrain(ActionEvent event) {
         if(currentArmy.getAllUnits().size() < 1){
@@ -90,6 +98,7 @@ public class ViewCustomArmyTwo extends ChildController {
             chooseTerrain.setDisable(true);
 
         }else {
+            saveArmyTwo();
             parent.customArmy = true;
             parent.show("ChooseTerrain.fxml");
         }

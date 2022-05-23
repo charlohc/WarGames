@@ -1,6 +1,7 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
+import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.WriteFile;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class ViewCustomArmyOne extends ChildController {
+    WriteFile writeFile = new WriteFile();
 
     @FXML
     public TableView<Unit> tableView;
@@ -85,6 +87,12 @@ public class ViewCustomArmyOne extends ChildController {
             numbersOfUnitText();
     }
 
+    public void saveArmyOne(){
+        if(parent.saveArmy()){
+            writeFile.printTxt(currentArmy);
+        }
+    }
+
     public void goBack(ActionEvent event) {
         parent.show("CreateArmyOne.fxml");
     }
@@ -97,6 +105,7 @@ public class ViewCustomArmyOne extends ChildController {
             createArmyTwo.setDisable(true);
 
         }else {
+            saveArmyOne();
             parent.show("CreateArmyTwo.fxml");
         }
     }

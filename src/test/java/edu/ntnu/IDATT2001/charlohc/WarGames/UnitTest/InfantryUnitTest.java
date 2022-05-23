@@ -16,7 +16,7 @@ InfantryUnit infantryUnit1, infantryUnit2,infantryUnit3;
         infantryUnit2 = new InfantryUnit("Infantry Unit two",100,15,10);
         infantryUnit3 = new InfantryUnit("Infantry Unit three",100,15,10);
 
-        infantryUnit1.setTerrainTypes(TerrainTypesENUM.FORREST);
+        infantryUnit1.setTerrainTypes(TerrainTypesENUM.FOREST);
         infantryUnit2.setTerrainTypes(TerrainTypesENUM.PLAINS);
         infantryUnit3.setTerrainTypes(TerrainTypesENUM.HILL);
 

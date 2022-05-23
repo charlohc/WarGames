@@ -14,6 +14,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.nio.file.Files;
 import java.util.ResourceBundle;
 
 //TODO: make import army two as one
@@ -47,9 +48,10 @@ public class ImportArmies extends ChildController implements Initializable {
         File file = fileChooser.showOpenDialog(new Stage());
             readFile.ReadFileGivenFile(file);
             if(readFile.ReadFileGivenFile(file) != null){
-                filePathOne.setText(file.getAbsolutePath());
-                armyOne = readFile.ReadFileGivenFile(file);
-                importedSuccessfully();
+                    filePathOne.setText(file.getAbsolutePath());
+                    armyOne = readFile.ReadFileGivenFile(file);
+                    importedSuccessfully();
+
             }
             parent.currentArmyOne = armyOne;
     }
@@ -72,7 +74,12 @@ public class ImportArmies extends ChildController implements Initializable {
     }
 
     public void viewArmyOne(ActionEvent event) {
-        parent.show("ViewImportedArmyOne.fxml");
+        if (parent.currentArmyOne != null && parent.currentArmyTwo!=null) {
+            parent.show("ViewImportedArmyOne.fxml");
+        }else{
+            infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
+            infoText.setText("Must import armies before continuing!");
+        }
     }
 
     public void goBack(ActionEvent event) {

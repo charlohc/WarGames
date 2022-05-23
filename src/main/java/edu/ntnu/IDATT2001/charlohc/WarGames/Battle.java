@@ -14,7 +14,7 @@ public class Battle {
     private Unit attacker, defender;
 
     //2050(?)
-    private int sleepTime = 100;
+    private int sleepTime = 1150;
 
     /**
      *
