@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controller;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
@@ -14,39 +14,36 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class DefaultArmyTwo extends ChildController{
-
+/**
+ * Shows default army one in table view
+ */
+public class DefaultArmyOne extends ChildController{
     UnitFactory unitFactory = new UnitFactory();
 
     @FXML
     public TableView<Unit> tableView;
-
-    @FXML
     public TableColumn<Unit,String> typeColumn;
     public TableColumn<Unit,String> nameColumn;
     public TableColumn<Unit,Integer> healthColumn;
-
-    @FXML
     public Text armyName;
-
-    @FXML
     public Pane scenePane;
-
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
 
-
     ObservableList<Unit> observableList = FXCollections.observableArrayList(
-            unitFactory.createUnitByType(UnitTypeENUM.CAVALRY,"Raider",70),
-            unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Gul dan",80),
-            unitFactory.createUnitByType(UnitTypeENUM.RANGED,"SpearMan",70),
-            unitFactory.createUnitByType(UnitTypeENUM.INFANTRY, "Grunt",60)
+            unitFactory.createUnitByType(UnitTypeENUM.CAVALRY,"Knight",70),
+            unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Mountain King",80),
+            unitFactory.createUnitByType(UnitTypeENUM.RANGED,"Archer",70),
+            unitFactory.createUnitByType(UnitTypeENUM.INFANTRY, "FootMan",60)
     );
 
+    /**
+     * Sets de tableView with information about object parameters of the army
+     */
     @Override
     public void load() {
-        currentArmy = new Army("Orcs", observableList);
-        parent.currentArmyTwo = currentArmy;
+        currentArmy = new Army("Humans", observableList);
+        parent.currentArmyOne = currentArmy;
 
         armyName.setText(currentArmy.getName());
 
@@ -59,6 +56,9 @@ public class DefaultArmyTwo extends ChildController{
         tableView.setItems(observableList);
     }
 
+    /**
+     * Text that shows how many of each unit type there is in the army
+     */
     public void numbersOfUnitText(){
         Text numbCavalry = new Text("Cavalry units: " + currentArmy.getCavalryUnits().size());
         numbCavalry.setY(200);
@@ -79,14 +79,19 @@ public class DefaultArmyTwo extends ChildController{
         scenePane.getChildren().addAll(numbCavalry,numbCommander,numbRanged,numbInfantry);
     }
 
-
+    /**
+     * methode to go back to earlier scene in program flow
+     * @param event button goBack
+     */
     public void goBack(ActionEvent event) {
-        parent.show("ViewDefaultArmyOne.fxml");
+        parent.show("Home.fxml");
     }
 
+    /**
+     * Methode to to to next scene in program flow
+     * @param event button viweArmyTwo
+     */
     public void viewArmyTwo(ActionEvent event) {
-        parent.importedArmies = false;
-        parent.customArmy = false;
-        parent.show("ChooseTerrain.fxml");
+        parent.show("ViewDefaultArmyTwo.fxml");
     }
 }

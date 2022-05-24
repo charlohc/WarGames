@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane fx:id="scenePane" minHeight="750.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.Controllers.MainController">
+<BorderPane fx:id="scenePane" minHeight="750.0" minWidth="900.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.ntnu.IDATT2001.charlohc.WarGames.Controller.MainController">
    <top>
       <Pane prefHeight="79.0" prefWidth="824.0" style="-fx-background-color: C1DBE3; -fx-border-color: bLACK;" BorderPane.alignment="CENTER">
          <children>

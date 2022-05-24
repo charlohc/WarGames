@@ -1,7 +1,6 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controller;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
-import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.WriteFile;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
@@ -22,10 +21,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import java.util.List;
 
-
-public class CreateArmyTwo extends ChildController{
+/**
+ * Creates army one
+ */
+public class CreateArmyOne extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
-    private Army currentArmyTwo;
+    private Army currentArmy;
     UnitFactory unitFactory;
     UnitTypeENUM unitType;
     Unit newUnit, testUnit;
@@ -35,20 +36,11 @@ public class CreateArmyTwo extends ChildController{
 
     @FXML
     ImageView calvaryImgView, commanderImgView, infantryImgView, rangedImgView;
-
-    @FXML
-    Pane cavalry, commander, infantry, ranged,infoPane;
-
-    @FXML
-    TextField armyName, unitName;
-
-    @FXML
-    Button addUnit,addFiveUnits,viewArmy, confirm;
-
-    @FXML
-    Text armour,attack,info;
-
-    @FXML public Spinner<Integer> health;
+    public Pane cavalry, commander, infantry, ranged,infoPane;
+    public TextField nameArmy,nameUnit;
+    public Button addUnit,addFiveUnits,viewArmy, confirm;
+    public Text armour,attack,info;
+    public Spinner<Integer> health;
 
     Image calvaryImg = new Image("file:img/cavalry.png");
     Image commanderImg = new Image("file:img/commander.png");
@@ -56,24 +48,28 @@ public class CreateArmyTwo extends ChildController{
     Image rangedImg = new Image("file:img/ranged.png");
 
 
+    /**
+     * Retains the information from parent on army one
+     * if army one already exist, the name will appear in the name army text-field, and the user will be able to go to next scene
+     * Textfield numberOfUnits tells how many units there are currently in the current army
+     */
     @Override
     public void load() {
-        currentArmyTwo = parent.currentArmyTwo;
+    currentArmy = parent.currentArmyOne;
+    if(parent.currentArmyOne != null){
+        nameArmy.setText(currentArmy.getName());
 
-        if(currentArmyTwo != null){
-            armyName.setText(currentArmyTwo.getName());
+        viewArmy.setDisable(false);
+        addUnit.setDisable(false);
+        addFiveUnits.setDisable(false);
 
-            viewArmy.setDisable(false);
-            addUnit.setDisable(false);
-            addFiveUnits.setDisable(false);
+        numbersOfUnits = currentArmy.getAllUnits().size();
 
-            numbersOfUnits = currentArmyTwo.getAllUnits().size();
-
-        }
-        calvaryImgView.setImage(calvaryImg);
-        commanderImgView.setImage(commanderImg);
-        infantryImgView.setImage(infantryImg);
-        rangedImgView.setImage(rangedImg);
+    }
+    calvaryImgView.setImage(calvaryImg);
+    commanderImgView.setImage(commanderImg);
+    infantryImgView.setImage(infantryImg);
+    rangedImgView.setImage(rangedImg);
 
         SpinnerValueFactory<Integer> valueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(20, 100);
         health.setValueFactory(valueFactory1);
@@ -82,62 +78,85 @@ public class CreateArmyTwo extends ChildController{
         unitFactory = new UnitFactory();
     }
 
+    /**
+     * Creates a new army with input from user, if name contains comma or is blank exeption will be thorwn
+     * @param event button confirm
+     */
     public void newArmy(ActionEvent event) {
-        if(armyName.getText().isBlank()){
+        if(nameArmy.getText().isBlank()){
             invalidArmy();
-        }else{
-            currentArmyTwo = new Army(armyName.getText());
-        }
-            if(currentArmyTwo.getName().contains(",")){
+
+        }else {
+            currentArmy = new Army(nameArmy.getText());
+
+            if(currentArmy.getName().contains(",")){
                 invalidArmy();
             }else {
-                info.setText(armyName.getText() + " is almost ready for battle, only needs units...");
+                info.setText(nameArmy.getText() + " is almost ready for battle, only needs units...");
                 infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
                 infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY,Insets.EMPTY)));
                 addUnit.setDisable(false);
                 addFiveUnits.setDisable(false);
                 viewArmy.setDisable(false);
 
-                parent.currentArmyTwo = currentArmyTwo;
+                parent.currentArmyOne = currentArmy;
+                numbersOfUnits = 0;
             }
         }
-
-
-    public void addUnit(ActionEvent event) {
-        if(unitName.getText().isBlank() || unitName.getText().contains(",") || unitType == null){
-            invalidUnit();
-        } else {
-
-            newUnit = unitFactory.createUnitByType(unitType, unitName.getText(), health.getValue());
-
-            units.add(newUnit);
-
-            currentArmyTwo.addUnit(newUnit);
-
-            unitName.clear();
-
-            numbersOfUnits++;
-            info();
-        }
     }
 
-    public void addFiveUnits(ActionEvent event){
-        if(unitName.getText().isBlank() || unitName.getText().contains(",") || unitType == null){
-            invalidUnit();
+    /**
+     * Creates a new unit based on the user input, if the name is blank or contains comma, or the unit type is not selected the user willl
+     * not add unit
+     * Adds unit to list of all units
+     * increases numbers of units in textfield numbersOfUNits
+     * @param event add button
+     */
+    public void addUnit(MouseEvent event) {
+        if(nameUnit.getText().isBlank() || nameUnit.getText().contains(",") || unitType == null){
+          invalidUnit();
+
         }else {
-            newUnits = unitFactory.createListOfUnits(5, unitType, unitName.getText(), health.getValue());
+            newUnit = unitFactory.createUnitByType(unitType, nameUnit.getText(), health.getValue());
 
-            units.addAll(newUnit);
+                units.add(newUnit);
 
-            currentArmyTwo.addAllUnits(newUnits);
+                currentArmy.addUnit(newUnit);
 
-            unitName.clear();
-            numbersOfUnits += 5;
-            info();
+                nameUnit.clear();
+
+                numbersOfUnits++;
+                info();
+        }
+    }
+
+    /**
+     * Creates five new unit based on the user input, if the name is blank or contains comma, or the unit type is not selected the user willl
+     * not add unit
+     * Adds units to unit list
+     * increases numbers of units
+     * @param event
+     */
+    public void addFiveUnits(ActionEvent event){
+        if(nameUnit.getText().isBlank() || nameUnit.getText().contains(",") || unitType == null ){
+           invalidUnit();
+
+        }else {
+            newUnits = unitFactory.createListOfUnits(5, unitType, nameUnit.getText(), health.getValue());
+
+                units.addAll(newUnit);
+                currentArmy.addAllUnits(newUnits);
+
+                nameUnit.clear();
+                numbersOfUnits += 5;
+                info();
 
         }
     }
 
+    /**
+     * Shows how many units there are in the army
+     */
     public void info(){
         infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
         infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY,Insets.EMPTY)));
@@ -146,6 +165,10 @@ public class CreateArmyTwo extends ChildController{
         }
     }
 
+    /**
+     * Register which pane the mouse clicks on, and gets the id of the pane, sets the id of the pane to the unittype
+     * @param mouseEvent cavalryPane, commanderPane,infantryPane,rangedPane
+     */
     public void selectedUnitType(MouseEvent mouseEvent) {
         Pane pane = (Pane) mouseEvent.getSource();
 
@@ -156,7 +179,7 @@ public class CreateArmyTwo extends ChildController{
             ranged.setBackground(new Background(new BackgroundFill(Color.web("#FAFAFA"), new CornerRadii(0), Insets.EMPTY)));
 
         }
-        pane.setBackground(new Background(new BackgroundFill(Color.web("#C7DFC5"), new CornerRadii(0), Insets.EMPTY)));
+        pane.setBackground(new Background(new BackgroundFill(Color.web("#228811"), new CornerRadii(0), Insets.EMPTY)));
         unitTypeSelected = true;
         unitType = UnitTypeENUM.valueOf(pane.getId().toUpperCase());
         testUnit = unitFactory.createUnitByType(unitType,"test",1);
@@ -165,12 +188,18 @@ public class CreateArmyTwo extends ChildController{
         attack.setText(String.valueOf(testUnit.getAttackValue()));
     }
 
+    /**
+     * Shows information that the unit the user tried to declare is invalid
+     */
     public void invalidUnit(){
         infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
         infoPane.setBackground(new Background(new BackgroundFill(Color.web("#FE7658"),CornerRadii.EMPTY,Insets.EMPTY)));
         info.setText("Invalid unit: must contain all info, and name can not contain ','");
     }
 
+    /**
+     * Shows information that the army the user tried to declare is invalid
+     */
     public void invalidArmy(){
         infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
         infoPane.setBackground(new Background(new BackgroundFill(Color.web("#FE7658"),CornerRadii.EMPTY,Insets.EMPTY)));
@@ -178,14 +207,21 @@ public class CreateArmyTwo extends ChildController{
     }
 
 
+    /**
+     * View next scene in program flow
+     * @param event button ViewArmy
+     */
     public void viewArmy(ActionEvent event){
-        parent.armies.add(currentArmyTwo);
-        parent.customArmy = true;
-        parent.importedArmies = false;
-        parent.show("ViewCustomArmyTwo.fxml");
+        parent.armies.add(currentArmy);
+        parent.show("ViewCustomArmyOne.fxml");
 
     }
+
+    /**
+     * View earlier page in program flow
+     * @param event button go Bakc
+     */
     public void goBack(ActionEvent event) {
-        parent.show("ViewCustomArmyOne.fxml");
+        parent.show("Home.fxml");
     }
 }

@@ -1,4 +1,4 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controller;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Battle;
@@ -7,7 +7,6 @@ import edu.ntnu.IDATT2001.charlohc.WarGames.Terrain.TerrainTypesENUM;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
 import javafx.application.Platform;
-import javafx.beans.binding.DoubleBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -22,15 +21,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
 import java.util.ArrayList;
 
+/**
+ * Class that simulates a battle between to armies
+ */
 public class SimulateBattle extends ChildController implements ChangeInHealth {
     Army armyOneOriginal, armyTwoOriginal,armyOneCopy, armyTwoCopy;
     Battle copyBattle;
     TerrainTypesENUM terrainType;
     Thread battleThread;
-    Unit testEqualsOne, testEqualsTwo;
     UnitFactory unitFactory = new UnitFactory();
 
     @FXML
@@ -51,6 +51,10 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
 
     private ObservableList<Unit> units = FXCollections.observableArrayList();
 
+    /**
+     * retains the information about army one, army two and terrain from parent
+     * creates a copy of the units
+     */
     @Override
     public void load() {
         armyOneOriginal = parent.currentArmyOne;
@@ -90,6 +94,9 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
 
     }
 
+    /**
+     * Sets background image based on terrain type of the armies in the battle
+     */
     public void setBackgroundImg(){
         if(terrainType == TerrainTypesENUM.FOREST){
             imageView.setImage(forrest);
@@ -100,6 +107,14 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
         }
     }
 
+    /**
+     * A methode that shows the damage happened during the attack, to the unit that was attacked
+     * The damage is found by calculating the start-health minus the current health
+     * Uses thread.sleep() so the user will be able to se the change
+     * @param unit the unit that the health changes
+     * @param startHealth an int that shows the start health
+     * @param currentHealth an int that shows the health to the unit after attack
+     */
     @Override
     public void changeInHealth(Unit unit, int startHealth, int currentHealth) {
         try {
@@ -127,6 +142,10 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
 
     }
 
+    /**
+     * Methode that gets the winner of the battle and shows it in text winnerArmyText, implements methodes
+     * viewWinnerArmy() and numbersOfUnits to show state of army after battle
+     */
     public void startSimulation() {
             battleThread = new Thread(() -> {
             Army winnerArmy = null;
@@ -157,7 +176,12 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
             });
         });
 
-
+        /**
+         * While the battle is occurring there is placed a listener on the health to  all units in each army
+         * Implements metode battleInfo() which gives information about the battle
+         * the runLater() function happens after the simulation is over and sets the loser army health to null with red fill and
+         * sets text "all dead"
+         */
         Thread messageThread = new Thread(() -> {
             while(battleThread.isAlive() && copyBattle.getDefender() != null){
                 battleInfo();
@@ -214,6 +238,10 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
         messageThread.start();
     }
 
+    /**
+     * After the simulation is over, a table view appeares with information about each unit in the winner army
+     * @param winnerArmy the army who won the simulation
+     */
     private void viewWinnerArmy(Army winnerArmy) {
         tableView.setOpacity(1);
 
@@ -235,6 +263,9 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
 
     }
 
+    /**
+     * Methode that tells which unit attacks which unit and changes the health, attack and resist text according to the units health
+     */
     public void battleInfo(){
         startSimulation.setDisable(true);
 
@@ -273,6 +304,10 @@ public class SimulateBattle extends ChildController implements ChangeInHealth {
 
     }
 
+    /**
+     * After the simulation the methode creates a textfield that shows how many units of each type is left in winner army
+     * @param winnerArmy the army who win the simulation
+     */
     public void numberOfUnits(Army winnerArmy){
 
         numberUnitsType.setOpacity(1);

@@ -1,7 +1,6 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controller;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
-import edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling.WriteFile;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
 import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
@@ -23,9 +22,9 @@ import javafx.scene.text.Text;
 import java.util.List;
 
 
-public class CreateArmyOne extends ChildController{
+public class CreateArmyTwo extends ChildController{
     private ObservableList<Unit> units = FXCollections.observableArrayList();
-    private Army currentArmy;
+    private Army currentArmyTwo;
     UnitFactory unitFactory;
     UnitTypeENUM unitType;
     Unit newUnit, testUnit;
@@ -40,7 +39,7 @@ public class CreateArmyOne extends ChildController{
     Pane cavalry, commander, infantry, ranged,infoPane;
 
     @FXML
-    TextField nameArmy,nameUnit;
+    TextField armyName, unitName;
 
     @FXML
     Button addUnit,addFiveUnits,viewArmy, confirm;
@@ -58,21 +57,22 @@ public class CreateArmyOne extends ChildController{
 
     @Override
     public void load() {
-    currentArmy = parent.currentArmyOne;
-    if(parent.currentArmyOne != null){
-        nameArmy.setText(currentArmy.getName());
+        currentArmyTwo = parent.currentArmyTwo;
 
-        viewArmy.setDisable(false);
-        addUnit.setDisable(false);
-        addFiveUnits.setDisable(false);
+        if(currentArmyTwo != null){
+            armyName.setText(currentArmyTwo.getName());
 
-        numbersOfUnits = currentArmy.getAllUnits().size();
+            viewArmy.setDisable(false);
+            addUnit.setDisable(false);
+            addFiveUnits.setDisable(false);
 
-    }
-    calvaryImgView.setImage(calvaryImg);
-    commanderImgView.setImage(commanderImg);
-    infantryImgView.setImage(infantryImg);
-    rangedImgView.setImage(rangedImg);
+            numbersOfUnits = currentArmyTwo.getAllUnits().size();
+
+        }
+        calvaryImgView.setImage(calvaryImg);
+        commanderImgView.setImage(commanderImg);
+        infantryImgView.setImage(infantryImg);
+        rangedImgView.setImage(rangedImg);
 
         SpinnerValueFactory<Integer> valueFactory1 = new SpinnerValueFactory.IntegerSpinnerValueFactory(20, 100);
         health.setValueFactory(valueFactory1);
@@ -82,59 +82,57 @@ public class CreateArmyOne extends ChildController{
     }
 
     public void newArmy(ActionEvent event) {
-        if(nameArmy.getText().isBlank()){
+        if(armyName.getText().isBlank()){
             invalidArmy();
-
-        }else {
-            currentArmy = new Army(nameArmy.getText());
-
-            if(currentArmy.getName().contains(",")){
+        }else{
+            currentArmyTwo = new Army(armyName.getText());
+        }
+            if(currentArmyTwo.getName().contains(",")){
                 invalidArmy();
             }else {
-                info.setText(nameArmy.getText() + " is almost ready for battle, only needs units...");
+                info.setText(armyName.getText() + " is almost ready for battle, only needs units...");
                 infoPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY,BorderWidths.DEFAULT)));
                 infoPane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"),CornerRadii.EMPTY,Insets.EMPTY)));
                 addUnit.setDisable(false);
                 addFiveUnits.setDisable(false);
                 viewArmy.setDisable(false);
 
-                parent.currentArmyOne = currentArmy;
-                numbersOfUnits = 0;
+                parent.currentArmyTwo = currentArmyTwo;
             }
         }
-    }
 
-    public void addUnit(MouseEvent event) {
-        if(nameUnit.getText().isBlank() || nameUnit.getText().contains(",") || unitType == null){
-          invalidUnit();
 
-        }else {
-            newUnit = unitFactory.createUnitByType(unitType, nameUnit.getText(), health.getValue());
+    public void addUnit(ActionEvent event) {
+        if(unitName.getText().isBlank() || unitName.getText().contains(",") || unitType == null){
+            invalidUnit();
+        } else {
 
-                units.add(newUnit);
+            newUnit = unitFactory.createUnitByType(unitType, unitName.getText(), health.getValue());
 
-                currentArmy.addUnit(newUnit);
+            units.add(newUnit);
 
-                nameUnit.clear();
+            currentArmyTwo.addUnit(newUnit);
 
-                numbersOfUnits++;
-                info();
+            unitName.clear();
+
+            numbersOfUnits++;
+            info();
         }
     }
 
     public void addFiveUnits(ActionEvent event){
-        if(nameUnit.getText().isBlank() || nameUnit.getText().contains(",") || unitType == null ){
-           invalidUnit();
-
+        if(unitName.getText().isBlank() || unitName.getText().contains(",") || unitType == null){
+            invalidUnit();
         }else {
-            newUnits = unitFactory.createListOfUnits(5, unitType, nameUnit.getText(), health.getValue());
+            newUnits = unitFactory.createListOfUnits(5, unitType, unitName.getText(), health.getValue());
 
-                units.addAll(newUnit);
-                currentArmy.addAllUnits(newUnits);
+            units.addAll(newUnit);
 
-                nameUnit.clear();
-                numbersOfUnits += 5;
-                info();
+            currentArmyTwo.addAllUnits(newUnits);
+
+            unitName.clear();
+            numbersOfUnits += 5;
+            info();
 
         }
     }
@@ -157,7 +155,7 @@ public class CreateArmyOne extends ChildController{
             ranged.setBackground(new Background(new BackgroundFill(Color.web("#FAFAFA"), new CornerRadii(0), Insets.EMPTY)));
 
         }
-        pane.setBackground(new Background(new BackgroundFill(Color.web("#ACCFAA"), new CornerRadii(0), Insets.EMPTY)));
+        pane.setBackground(new Background(new BackgroundFill(Color.web("#C7DFC5"), new CornerRadii(0), Insets.EMPTY)));
         unitTypeSelected = true;
         unitType = UnitTypeENUM.valueOf(pane.getId().toUpperCase());
         testUnit = unitFactory.createUnitByType(unitType,"test",1);
@@ -179,13 +177,14 @@ public class CreateArmyOne extends ChildController{
     }
 
 
-
     public void viewArmy(ActionEvent event){
-        parent.armies.add(currentArmy);
-        parent.show("ViewCustomArmyOne.fxml");
+        parent.armies.add(currentArmyTwo);
+        parent.customArmy = true;
+        parent.importedArmies = false;
+        parent.show("ViewCustomArmyTwo.fxml");
 
     }
     public void goBack(ActionEvent event) {
-        parent.show("Home.fxml");
+        parent.show("ViewCustomArmyOne.fxml");
     }
 }

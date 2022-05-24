@@ -1,9 +1,7 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controller;
 
 import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import edu.ntnu.IDATT2001.charlohc.WarGames.Unit.Unit;
-import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitFactory;
-import edu.ntnu.IDATT2001.charlohc.WarGames.UnitFactory.UnitTypeENUM;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,8 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
-public class DefaultArmyOne extends ChildController{
-    UnitFactory unitFactory = new UnitFactory();
+public class ViewImportedArmyTwo extends ChildController {
 
     @FXML
     public TableView<Unit> tableView;
@@ -24,38 +21,29 @@ public class DefaultArmyOne extends ChildController{
     public TableColumn<Unit,String> typeColumn;
     public TableColumn<Unit,String> nameColumn;
     public TableColumn<Unit,Integer> healthColumn;
-
+    @FXML
+    Pane scenePane;
     @FXML
     public Text armyName;
-
-    @FXML
-    public Pane scenePane;
 
     private ObservableList<Unit> units = FXCollections.observableArrayList();
     private Army currentArmy;
 
-    ObservableList<Unit> observableList = FXCollections.observableArrayList(
-            unitFactory.createUnitByType(UnitTypeENUM.CAVALRY,"Knight",70),
-            unitFactory.createUnitByType(UnitTypeENUM.COMMANDER,"Mountain King",80),
-            unitFactory.createUnitByType(UnitTypeENUM.RANGED,"Archer",70),
-            unitFactory.createUnitByType(UnitTypeENUM.INFANTRY, "FootMan",60)
-    );
-
     @Override
     public void load() {
-        currentArmy = new Army("Humans", observableList);
-        parent.currentArmyOne = currentArmy;
+        currentArmy = parent.currentArmyTwo;
+        this.units.addAll(currentArmy.getAllUnits());
 
-        armyName.setText(currentArmy.getName());
-
-        numbersOfUnitText();
+        armyName.setText(currentArmy.getName() + " army");
 
         tableView.setItems(units);
         typeColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("unitType"));
         nameColumn.setCellValueFactory(new PropertyValueFactory<Unit, String>("name"));
         healthColumn.setCellValueFactory(new PropertyValueFactory<Unit, Integer>("health"));
-        tableView.setItems(observableList);
+
+        numbersOfUnitText();
     }
+
 
     public void numbersOfUnitText(){
         Text numbCavalry = new Text("Cavalry units: " + currentArmy.getCavalryUnits().size());
@@ -70,19 +58,21 @@ public class DefaultArmyOne extends ChildController{
         numbRanged.setY(200);
         numbRanged.setX(480);
 
-        Text numbInfantry = new Text("Infantry units: " + currentArmy.getCavalryUnits().size());
+        Text numbInfantry = new Text("Infantry units: " + currentArmy.getInfantryUnits().size());
         numbInfantry.setY(200);
         numbInfantry.setX(630);
 
         scenePane.getChildren().addAll(numbCavalry,numbCommander,numbRanged,numbInfantry);
     }
 
-  
-    public void goBack(ActionEvent event) {
-        parent.show("Home.fxml");
+
+    public void chooseTerrain(ActionEvent event) {
+        parent.importedArmies = true;
+        parent.customArmy = false;
+        parent.show("ChooseTerrain.fxml");
     }
 
-    public void viewArmyTwo(ActionEvent event) {
-        parent.show("ViewDefaultArmyTwo.fxml");
+    public void goBack(ActionEvent event) {
+        parent.show("ViewImportedArmyOne.fxml");
     }
 }

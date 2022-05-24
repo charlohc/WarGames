@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-//TODO: make more test
+
 class ReadFileTest {
     ReadFile readFile;
     WriteFile writeFile;
@@ -29,16 +29,12 @@ class ReadFileTest {
 
     }
 
-    //TODO: How do i test that is returns correctly
-    //TODO: find another way to read from file, se teacher git lab
+
     @Test
      void TestOutFileCorrectUsage() throws Exception {
         readFile.ReadFileGivenFile(new File(army.getName()));
     }
 
-
-    //Wants to make sure that the system keeps running even though it happens something that shouldn't happen, the user will get a message
-    //TODO: corrected tested?
     @Test
      void TestEmptyNameFile() throws Exception {
         readFile.ReadFileGivenFile(new File(""));
@@ -55,7 +51,7 @@ class ReadFileTest {
 
     @Test
      void TestReadEmptyFile() throws Exception{
-        //assertThrows(Exception.class,() -> readFile.ReadFileGivenFile(new File("emptyFile.csv")));
+        assertThrows(Exception.class,() -> readFile.ReadFileGivenFile(new File("emptyFile.csv")));
 
     }
 

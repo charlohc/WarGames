@@ -1,6 +1,9 @@
 package edu.ntnu.IDATT2001.charlohc.WarGames.FileHandling;
 import javafx.scene.control.Alert;
 
+/**
+ * Sends alerts to user, that something in wrong with file
+ */
 public class ExceptionAlert {
     Alert alert = new Alert(Alert.AlertType.ERROR);
 

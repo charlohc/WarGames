@@ -1,8 +1,10 @@
-package edu.ntnu.IDATT2001.charlohc.WarGames.Controllers;
+package edu.ntnu.IDATT2001.charlohc.WarGames.Controller;
 
-import edu.ntnu.IDATT2001.charlohc.WarGames.Army;
 import javafx.event.ActionEvent;
 
+/**
+ * Home screen, gives the user three options
+ */
 public class HomeController extends ChildController {
 
     @Override

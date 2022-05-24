@@ -16,7 +16,7 @@ public class UnitFactory {
             case RANGED -> new RangedUnit(name, health);
         };
     }
-//Test methode
+
     public List<Unit> createListOfUnits(int numberOfUnits, UnitTypeENUM unitType, String name, int health) throws IllegalArgumentException{
         ArrayList<Unit> newListOfUnits = new ArrayList<>();
         for (int i = 0; i < numberOfUnits; i++) {
